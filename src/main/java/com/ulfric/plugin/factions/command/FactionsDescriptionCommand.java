@@ -20,7 +20,7 @@ import com.ulfric.plugin.locale.TellService;
 
 @Name("description")
 @Alias("desc")
-public class FactionsDescriptionCommand extends FactionsCommand {
+public class FactionsDescriptionCommand extends FactionsCommand { // TODO cleanup
 
 	public static final Pattern ALLOWED_DESCRIPTION_CHARACTERS = RegexHelper.compile("[a-zA-Z0-9 _\\.\\!\\?\\-\\#\\$\\,\\/\\%]+");
 
