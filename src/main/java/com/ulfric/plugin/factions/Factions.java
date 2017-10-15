@@ -25,6 +25,14 @@ public class Factions implements Service<Factions> {
 		return get().persistDenizen(denizen);
 	}
 
+	public static CompletableFuture<Entity> getFaction(String name) {
+		return get().getFactionByName(name);
+	}
+
+	public static CompletableFuture<Response> saveFaction(Entity faction) {
+		return get().persistFaction(faction);
+	}
+
 	@Inject
 	private FactionsSystem factions;
 
@@ -35,8 +43,16 @@ public class Factions implements Service<Factions> {
 		return denizens.createEntity(uniqueId).thenApply(Instance::get);
 	}
 
-	public CompletableFuture<Response> persistDenizen(Entity entity) {
-		return denizens.persist(entity);
+	public CompletableFuture<Response> persistDenizen(Entity denizen) {
+		return denizens.persist(denizen);
+	}
+
+	public CompletableFuture<Entity> getFactionByName(String name) {
+		return factions.createEntity(name.toLowerCase()).thenApply(Instance::get);
+	}
+
+	public CompletableFuture<Response> persistFaction(Entity faction) {
+		return factions.persist(faction);
 	}
 
 	@Override

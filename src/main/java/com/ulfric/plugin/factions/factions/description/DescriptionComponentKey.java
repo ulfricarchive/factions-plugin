@@ -3,7 +3,7 @@ package com.ulfric.plugin.factions.factions.description;
 import com.ulfric.commons.naming.Name;
 import com.ulfric.plugin.entities.components.ComponentKey;
 
-@Name("description")
+@Name("factions/description")
 enum DescriptionComponentKey implements ComponentKey<DescriptionComponent> {
 
 	INSTANCE;

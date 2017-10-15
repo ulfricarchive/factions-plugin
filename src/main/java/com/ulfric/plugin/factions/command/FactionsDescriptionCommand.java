@@ -2,17 +2,19 @@ package com.ulfric.plugin.factions.command;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.Future;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 
 import com.ulfric.commons.naming.Name;
 import com.ulfric.commons.text.RegexHelper;
 import com.ulfric.dragoon.rethink.response.ResponseHelper;
 import com.ulfric.plugin.commands.Alias;
 import com.ulfric.plugin.commands.Context;
+import com.ulfric.plugin.entities.Entity;
 import com.ulfric.plugin.entities.components.Component;
 import com.ulfric.plugin.factions.Factions;
 import com.ulfric.plugin.factions.factions.description.DescriptionComponent;
@@ -20,65 +22,58 @@ import com.ulfric.plugin.locale.TellService;
 
 @Name("description")
 @Alias("desc")
-public class FactionsDescriptionCommand extends FactionsCommand { // TODO cleanup
+public class FactionsDescriptionCommand extends DenizenFactionsCommand { // TODO cleanup
 
 	public static final Pattern ALLOWED_DESCRIPTION_CHARACTERS = RegexHelper.compile("[a-zA-Z0-9 _\\.\\!\\?\\-\\#\\$\\,\\/\\%]+");
 
 	@Override
-	public void run(Context context) {
-		Player player = Context.getPlayer(context);
+	public Future<?> runAsDenizen(Context context, Entity denizen) {
+		CommandSender sender = context.getSender();
 
-		Factions.getDenizen(player.getUniqueId()).whenComplete((denizen, error) -> {
-			if (error != null) {
-				TellService.sendMessage(player, "factions-error-denizen-not-found");
+		String newDescription = descriptionFromContext(context);
+		if (newDescription == null) {
+			Component description = denizen.getComponents().remove(DescriptionComponent.KEY);
+
+			if (description == null) {
+				TellService.sendMessage(sender, "factions-description-example");
+				return null;
+			}
+		} else {
+			if (!RegexHelper.matches(newDescription, ALLOWED_DESCRIPTION_CHARACTERS)) {
+				TellService.sendMessage(sender, "factions-description-illegal-characters");
+				return null;
+			}
+
+			DescriptionComponent description = denizen.getComponent(DescriptionComponent.KEY);
+			if (description != null) {
+				if (Objects.equals(description.getDescription(), newDescription)) {
+					TellService.sendMessage(sender, "factions-description-already-set");
+					return null;
+				}
+			}
+			else {
+				description = new DescriptionComponent();
+				denizen.addComponent(description);
+			}
+			description.setDescription(newDescription);
+		}
+
+		return Factions.saveDenizen(denizen).whenComplete((saved, saveError) -> {
+			if (saveError != null || !ResponseHelper.changedData(saved)) {
+				if (newDescription == null) {
+					TellService.sendMessage(sender, "factions-description-delete-save-error");
+				} else {
+					TellService.sendMessage(sender, "factions-description-save-error");
+				}
+
 				return;
 			}
 
-			String newDescription = descriptionFromContext(context);
 			if (newDescription == null) {
-				Component description = denizen.getComponents().remove(DescriptionComponent.KEY);
-
-				if (description == null) {
-					TellService.sendMessage(player, "factions-description-example");
-					return;
-				}
+				TellService.sendMessage(sender, "factions-description-deleted");
 			} else {
-				if (!RegexHelper.matches(newDescription, ALLOWED_DESCRIPTION_CHARACTERS)) {
-					TellService.sendMessage(player, "factions-description-illegal-characters");
-					return;
-				}
-
-				DescriptionComponent description = denizen.getComponent(DescriptionComponent.KEY);
-				if (description != null) {
-					if (Objects.equals(description.getDescription(), newDescription)) {
-						TellService.sendMessage(player, "factions-description-already-set");
-						return;
-					}
-				}
-				else {
-					description = new DescriptionComponent();
-					denizen.addComponent(description);
-				}
-				description.setDescription(newDescription);
+				TellService.sendMessage(sender, "factions-description-saved");
 			}
-
-			Factions.saveDenizen(denizen).whenComplete((saved, saveError) -> {
-				if (saveError != null || !ResponseHelper.changedData(saved)) {
-					if (newDescription == null) {
-						TellService.sendMessage(player, "factions-description-delete-save-error");
-					} else {
-						TellService.sendMessage(player, "factions-description-save-error");
-					}
-
-					return;
-				}
-
-				if (newDescription == null) {
-					TellService.sendMessage(player, "factions-description-deleted");
-				} else {
-					TellService.sendMessage(player, "factions-description-saved");
-				}
-			});
 		});
 	}
 
