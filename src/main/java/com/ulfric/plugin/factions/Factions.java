@@ -7,8 +7,8 @@ import com.ulfric.dragoon.extension.inject.Inject;
 import com.ulfric.dragoon.rethink.Instance;
 import com.ulfric.dragoon.rethink.response.Response;
 import com.ulfric.plugin.entities.Entity;
-import com.ulfric.plugin.factions.denizens.DenizensSystem;
-import com.ulfric.plugin.factions.factions.FactionsSystem;
+import com.ulfric.plugin.factions.denizens.DenizenSystem;
+import com.ulfric.plugin.factions.factions.FactionSystem;
 import com.ulfric.plugin.services.Service;
 
 public class Factions implements Service<Factions> {
@@ -34,10 +34,10 @@ public class Factions implements Service<Factions> {
 	}
 
 	@Inject
-	private FactionsSystem factions;
+	private FactionSystem factions;
 
 	@Inject
-	private DenizensSystem denizens;
+	private DenizenSystem denizens;
 
 	public CompletableFuture<Entity> getDenizenByUniqueId(UUID uniqueId) {
 		return denizens.createEntity(uniqueId).thenApply(Instance::get);

@@ -1,13 +1,13 @@
-package com.ulfric.plugin.factions.denizens;
+package com.ulfric.plugin.factions.factions;
 
 import com.ulfric.dragoon.rethink.Database;
 import com.ulfric.dragoon.rethink.Store;
 import com.ulfric.plugin.entities.Entity;
 import com.ulfric.plugin.entities.EntitySystem;
 
-public class DenizensSystem extends EntitySystem {
+public class FactionSystem extends EntitySystem {
 
-	@Database(table = "factions")
+	@Database(table = "factions/factions")
 	private Store<Entity> store;
 
 	@Override
