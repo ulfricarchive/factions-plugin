@@ -16,6 +16,7 @@ import com.ulfric.commons.naming.Name;
 import com.ulfric.commons.text.RegexHelper;
 import com.ulfric.dragoon.rethink.response.Response;
 import com.ulfric.dragoon.rethink.response.ResponseHelper;
+import com.ulfric.i18n.content.Details;
 import com.ulfric.plugin.commands.Alias;
 import com.ulfric.plugin.commands.Context;
 import com.ulfric.plugin.commands.argument.Argument;
@@ -75,27 +76,17 @@ public class FactionsCreateCommand extends DenizenFactionsCommand { // TODO clea
 				return;
 			}
 
-			MembersComponent members = faction.getComponent(MembersComponent.KEY);
-			if (members != null) {
+			if (faction.hasComponent(MembersComponent.KEY)) {
 				TellService.sendMessage(player, "factions-create-already-exists");
 				return;
 			}
-			members = new MembersComponent();
-			Map<UUID, List<Position>> membersToPositions = new HashMap<>();
-			List<Position> positions = new ArrayList<>();
-			Position leader = new Position();
-			leader.setName(StandardRoles.LEADER.getName());
-			positions.add(leader);
-			membersToPositions.put(player.getUniqueId(), positions);
-			members.setMembers(membersToPositions);
-			faction.addComponent(members);
+			faction.addComponent(createMembers(player.getUniqueId()));
 
-			NameComponent formalName = new NameComponent();
-			formalName.setName(name);
-			faction.addComponent(formalName);
+			faction.addComponent(formalName());
 
 			membership.setFactionByEntity(faction);
 
+			Details details = Details.of("faction", faction);
 			Future<?> factionWait = Factions.saveFaction(faction)
 					.thenAccept(response -> {
 						if (!ResponseHelper.changedData(response)) {
@@ -109,14 +100,38 @@ public class FactionsCreateCommand extends DenizenFactionsCommand { // TODO clea
 							throw new FactionCreateException("Failed to save denizen", response);
 						}
 					})
-					.thenRun(() -> TellService.sendMessage(player, "factions-create"))
+					.thenRun(() -> TellService.sendMessage(player, "factions-create", details))
 					.exceptionally(exception -> {
 						exception.printStackTrace(); // TODO error handling
-						TellService.sendMessage(player, "factions-error-save");
+						details.add("error", exception);
+						TellService.sendMessage(player, "factions-error-save", details);
 						return null;
 					});
 			Futures.getUnchecked(factionWait);
 		});
+	}
+
+	private NameComponent formalName() {
+		NameComponent formalName = new NameComponent();
+		formalName.setName(name);
+		return formalName;
+	}
+
+	private MembersComponent createMembers(UUID leader) {
+		MembersComponent members = new MembersComponent();
+		Map<UUID, List<Position>> membersToPositions = new HashMap<>();
+		List<Position> positions = new ArrayList<>();
+		positions.add(position(StandardRoles.FOUNDER));
+		positions.add(position(StandardRoles.LEADER));
+		membersToPositions.put(leader, positions);
+		members.setMembers(membersToPositions);
+		return members;
+	}
+
+	private Position position(StandardRoles role) {
+		Position position = new Position();
+		position.setRole(role.getName());
+		return position;
 	}
 
 	private MembershipComponent membership(Entity denizen) {

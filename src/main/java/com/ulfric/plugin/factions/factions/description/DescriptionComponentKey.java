@@ -13,9 +13,4 @@ enum DescriptionComponentKey implements ComponentKey<DescriptionComponent> {
 		return DescriptionComponent.class;
 	}
 
-	@Override
-	public String toString() {
-		return getName();
-	}
-
 }

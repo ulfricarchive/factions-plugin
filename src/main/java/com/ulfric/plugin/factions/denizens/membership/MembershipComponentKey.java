@@ -13,9 +13,4 @@ enum MembershipComponentKey implements ComponentKey<MembershipComponent> {
 		return MembershipComponent.class;
 	}
 
-	@Override
-	public String toString() {
-		return getName();
-	}
-
 }
