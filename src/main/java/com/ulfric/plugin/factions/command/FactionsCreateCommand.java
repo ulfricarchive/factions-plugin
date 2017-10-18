@@ -131,7 +131,7 @@ public class FactionsCreateCommand extends DenizenFactionsCommand { // TODO clea
 	}
 
 	private String getSyntacticError() {
-		if (isNameWithinRequiredLength()) {
+		if (!isNameWithinRequiredLength()) {
 			return "factions-create-name-length";
 		}
 
