@@ -9,7 +9,6 @@ import java.util.concurrent.Future;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.bukkit.entity.Player;
 
 import com.google.common.util.concurrent.Futures;
 import com.ulfric.commons.naming.Name;
@@ -18,7 +17,6 @@ import com.ulfric.dragoon.rethink.response.Response;
 import com.ulfric.dragoon.rethink.response.ResponseHelper;
 import com.ulfric.i18n.content.Details;
 import com.ulfric.plugin.commands.Alias;
-import com.ulfric.plugin.commands.Context;
 import com.ulfric.plugin.commands.argument.Argument;
 import com.ulfric.plugin.entities.Entity;
 import com.ulfric.plugin.entities.components.name.NameComponent;
@@ -27,7 +25,6 @@ import com.ulfric.plugin.factions.denizens.membership.MembershipComponent;
 import com.ulfric.plugin.factions.factions.members.MembersComponent;
 import com.ulfric.plugin.factions.factions.members.Position;
 import com.ulfric.plugin.factions.factions.roles.StandardRoles;
-import com.ulfric.plugin.locale.TellService;
 
 @Name("create")
 @Alias({"make", "new"})
@@ -40,9 +37,9 @@ public class FactionsCreateCommand extends DenizenFactionsCommand { // TODO clea
 	private String name;
 
 	@Override
-	public void run(Context context) {
+	public void run() {
 		if (name == null) {
-			// TODO sign for the user to enter a name
+			requestOnSign("factions-create-sign", "/f create");
 			return;
 		}
 
@@ -53,40 +50,40 @@ public class FactionsCreateCommand extends DenizenFactionsCommand { // TODO clea
 
 		String error = getSyntacticError();
 		if (error != null) {
-			TellService.sendMessage(context.getSender(), error);
+			tell(error);
 			return;
 		}
 
-		super.run(context);
+		super.run();
 	}
 
 	@Override
-	public Future<?> runAsDenizen(Context context, Entity denizen) {
-		Player player = Context.getPlayer(context);
-
+	public Future<?> runAsDenizen() {
 		MembershipComponent membership = membership(denizen);
 		if (StringUtils.isNotEmpty(membership.getFaction())) {
-			TellService.sendMessage(player, "factions-create-already-member");
+			tell("factions-create-already-member");
 			return null;
 		}
 
 		return Factions.getFaction(name).whenComplete((faction, createError) -> {
 			if (createError != null || faction == null) {
-				TellService.sendMessage(player, "factions-create-failed");
+				tell("factions-create-failed");
 				return;
 			}
+
+			Details details = details();
+			details.add("faction", faction);
 
 			if (faction.hasComponent(MembersComponent.KEY)) {
-				TellService.sendMessage(player, "factions-create-already-exists");
+				tell("factions-create-already-exists", details);
 				return;
 			}
-			faction.addComponent(createMembers(player.getUniqueId()));
 
+			faction.addComponent(createMembers(uniqueId()));
 			faction.addComponent(formalName());
 
 			membership.setFactionByEntity(faction);
 
-			Details details = Details.of("faction", faction);
 			Future<?> factionWait = Factions.saveFaction(faction)
 					.thenAccept(response -> {
 						if (!ResponseHelper.changedData(response)) {
@@ -100,11 +97,11 @@ public class FactionsCreateCommand extends DenizenFactionsCommand { // TODO clea
 							throw new FactionCreateException("Failed to save denizen", response);
 						}
 					})
-					.thenRun(() -> TellService.sendMessage(player, "factions-create", details))
+					.thenRun(() -> tell("factions-create", details))
 					.exceptionally(exception -> {
 						exception.printStackTrace(); // TODO error handling
 						details.add("error", exception);
-						TellService.sendMessage(player, "factions-error-save", details);
+						tell("factions-error-save", details);
 						return null;
 					});
 			Futures.getUnchecked(factionWait);
