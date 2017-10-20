@@ -16,6 +16,13 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.ulfric.commons</groupId>
+			<artifactId>commons-bukkit</artifactId>
+			<version>1.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>com.ulfric.plugin</groupId>
 			<artifactId>data-plugin</artifactId>
 			<version>1.0.0</version>

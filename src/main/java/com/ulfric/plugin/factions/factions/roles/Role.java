@@ -1,23 +1,14 @@
 package com.ulfric.plugin.factions.factions.roles;
 
-import java.util.List;
+import java.util.Set;
 
 import com.ulfric.commons.value.Bean;
 
-public class Role extends Bean {
+public class Role extends Bean implements Permissible {
 
-	private String name;
 	private String title;
-	private List<String> parents;
-	private List<String> permissions;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	private Set<String> parents;
+	private Set<String> permissions;
 
 	public String getTitle() {
 		return title;
@@ -27,20 +18,31 @@ public class Role extends Bean {
 		this.title = title;
 	}
 
-	public List<String> getParents() {
+	public Set<String> getParents() {
 		return parents;
 	}
 
-	public void setParents(List<String> parents) {
+	public void setParents(Set<String> parents) {
 		this.parents = parents;
 	}
 
-	public List<String> getPermissions() {
+	public Set<String> getPermissions() {
 		return permissions;
 	}
 
-	public void setPermissions(List<String> permissions) {
+	public void setPermissions(Set<String> permissions) {
 		this.permissions = permissions;
+	}
+
+	@Override
+	public boolean hasPermission(String permission) {
+		Set<String> permissions = getPermissions();
+
+		if (permissions == null) {
+			return false;
+		}
+
+		return permissions.contains(permission.toLowerCase());
 	}
 
 }

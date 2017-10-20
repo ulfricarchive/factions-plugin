@@ -21,6 +21,7 @@ import com.ulfric.plugin.commands.argument.Argument;
 import com.ulfric.plugin.entities.Entity;
 import com.ulfric.plugin.entities.components.name.NameComponent;
 import com.ulfric.plugin.factions.Factions;
+import com.ulfric.plugin.factions.command.exception.FactionCreateException;
 import com.ulfric.plugin.factions.denizens.membership.MembershipComponent;
 import com.ulfric.plugin.factions.factions.members.MembersComponent;
 import com.ulfric.plugin.factions.factions.members.Position;

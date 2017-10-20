@@ -3,8 +3,10 @@ package com.ulfric.plugin.factions.command;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import com.ulfric.dragoon.stereotype.Stereotypes;
 import com.ulfric.plugin.entities.Entity;
 import com.ulfric.plugin.factions.denizens.membership.MembershipComponent;
+import com.ulfric.plugin.factions.factions.members.MembersComponent;
 
 public abstract class DenizenFactionFactionsCommand extends DenizenFactionsCommand {
 
@@ -27,6 +29,12 @@ public abstract class DenizenFactionFactionsCommand extends DenizenFactionsComma
 			}
 
 			this.faction = faction;
+
+			if (!hasFactionPermissions()) {
+				tell("factions-no-permission");
+				return;
+			}
+
 			Future<?> run = runAsFaction();
 
 			if (run == null) {
@@ -42,5 +50,20 @@ public abstract class DenizenFactionFactionsCommand extends DenizenFactionsComma
 	}
 
 	public abstract Future<?> runAsFaction();
+
+	protected final boolean hasFactionPermissions() {
+		for (FactionsPermission permission : Stereotypes.getAll(getClass(), FactionsPermission.class)) {
+			if (!hasFactionPermission(permission.value())) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	protected final boolean hasFactionPermission(String permission) {
+		permission = permission.toLowerCase();
+		return MembersComponent.getPermissions(faction, uniqueId()).hasPermission(permission);
+	}
 
 }
