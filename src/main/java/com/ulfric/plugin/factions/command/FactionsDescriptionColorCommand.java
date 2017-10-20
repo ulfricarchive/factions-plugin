@@ -13,7 +13,7 @@ import com.ulfric.plugin.factions.factions.description.DescriptionComponent;
 
 @Name("color")
 @Alias("colour")
-@Permission("factions-description-color")
+@Permission(value = "factions-description-color", message = "factions-description-color-perk")
 @FactionsPermission("description-color")
 public class FactionsDescriptionColorCommand extends FactionsDescriptionCommand {
 
