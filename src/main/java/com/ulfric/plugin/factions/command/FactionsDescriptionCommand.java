@@ -18,7 +18,7 @@ import com.ulfric.plugin.factions.factions.description.DescriptionComponent;
 
 @Name("description")
 @Alias("desc")
-@FactionsPermission("")
+@FactionsPermission("description")
 public class FactionsDescriptionCommand extends DenizenFactionFactionsCommand {
 
 	public static final Pattern ALLOWED_DESCRIPTION_CHARACTERS = RegexHelper.compile("[a-zA-Z0-9 _\\.\\!\\?\\-\\#\\$\\,\\/\\%]+");

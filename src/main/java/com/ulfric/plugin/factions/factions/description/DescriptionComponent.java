@@ -10,6 +10,7 @@ public class DescriptionComponent extends Component {
 	public static final ComponentKey<DescriptionComponent> KEY = DescriptionComponentKey.INSTANCE;
 
 	private String description;
+	private DescriptionColor color;
 	private UUID writtenBy;
 
 	public String getDescription() {
@@ -18,6 +19,14 @@ public class DescriptionComponent extends Component {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public DescriptionColor getColor() {
+		return color;
+	}
+
+	public void setColor(DescriptionColor color) {
+		this.color = color;
 	}
 
 	public UUID getWrittenBy() {
