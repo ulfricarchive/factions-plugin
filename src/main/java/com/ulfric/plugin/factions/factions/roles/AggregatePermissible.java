@@ -21,4 +21,11 @@ public final class AggregatePermissible implements Permissible {
 		return false;
 	}
 
+	@Override
+	public int getWorth() {
+		return permissions.stream()
+				.mapToInt(Permissible::getWorth)
+				.sum();
+	}
+
 }

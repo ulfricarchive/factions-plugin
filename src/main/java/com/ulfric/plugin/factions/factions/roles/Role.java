@@ -9,6 +9,7 @@ public class Role extends Bean implements Permissible {
 	private String title;
 	private Set<String> parents;
 	private Set<String> permissions;
+	private Integer rank;
 
 	public String getTitle() {
 		return title;
@@ -43,6 +44,20 @@ public class Role extends Bean implements Permissible {
 		}
 
 		return permissions.contains(permission.toLowerCase());
+	}
+
+	public Integer getRank() {
+		return rank;
+	}
+
+	public void setRank(Integer rank) {
+		this.rank = rank;
+	}
+
+	@Override
+	public int getWorth() {
+		Integer rank = getRank();
+		return rank == null ? 0 : rank;
 	}
 
 }

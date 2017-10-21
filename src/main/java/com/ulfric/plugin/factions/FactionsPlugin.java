@@ -17,6 +17,10 @@ import com.ulfric.plugin.factions.factions.description.function.DescriptionColor
 import com.ulfric.plugin.factions.factions.description.function.DescriptionFunction;
 import com.ulfric.plugin.factions.factions.description.function.DescriptionTextFunction;
 import com.ulfric.plugin.factions.factions.members.MembersComponent;
+import com.ulfric.plugin.factions.factions.members.function.MemberJoinedFunction;
+import com.ulfric.plugin.factions.factions.members.function.MemberNameFunction;
+import com.ulfric.plugin.factions.factions.members.function.MemberRolesFunction;
+import com.ulfric.plugin.factions.factions.members.function.MembersFunction;
 import com.ulfric.plugin.factions.factions.roles.RolesComponent;
 
 public class FactionsPlugin extends Plugin {
@@ -43,6 +47,10 @@ public class FactionsPlugin extends Plugin {
 		Function.register(new DescriptionFunction());
 		Function.register(new DescriptionTextFunction());
 		Function.register(new DescriptionColorFunction());
+		Function.register(new MembersFunction());
+		Function.register(new MemberNameFunction());
+		Function.register(new MemberRolesFunction());
+		Function.register(new MemberJoinedFunction());
 	}
 
 }

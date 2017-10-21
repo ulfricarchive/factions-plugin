@@ -4,4 +4,6 @@ public interface Permissible {
 
 	boolean hasPermission(String node);
 
+	int getWorth();
+
 }

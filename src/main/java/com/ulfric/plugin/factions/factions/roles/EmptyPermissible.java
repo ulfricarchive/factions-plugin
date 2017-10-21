@@ -9,4 +9,9 @@ public enum EmptyPermissible implements Permissible {
 		return false;
 	}
 
+	@Override
+	public int getWorth() {
+		return 0;
+	}
+
 }

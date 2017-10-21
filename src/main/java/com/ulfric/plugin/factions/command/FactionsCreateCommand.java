@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.util.concurrent.Futures;
 import com.ulfric.commons.naming.Name;
 import com.ulfric.commons.text.RegexHelper;
+import com.ulfric.commons.time.TemporalHelper;
 import com.ulfric.dragoon.rethink.response.Response;
 import com.ulfric.dragoon.rethink.response.ResponseHelper;
 import com.ulfric.i18n.content.Details;
@@ -24,7 +25,7 @@ import com.ulfric.plugin.factions.Factions;
 import com.ulfric.plugin.factions.command.exception.FactionCreateException;
 import com.ulfric.plugin.factions.denizens.membership.MembershipComponent;
 import com.ulfric.plugin.factions.factions.members.MembersComponent;
-import com.ulfric.plugin.factions.factions.members.Position;
+import com.ulfric.plugin.factions.factions.members.Membership;
 import com.ulfric.plugin.factions.factions.roles.StandardRoles;
 
 @Name("create")
@@ -117,19 +118,22 @@ public class FactionsCreateCommand extends DenizenFactionsCommand { // TODO clea
 
 	private MembersComponent createMembers(UUID leader) {
 		MembersComponent members = new MembersComponent();
-		Map<UUID, List<Position>> membersToPositions = new HashMap<>();
-		List<Position> positions = new ArrayList<>();
-		positions.add(position(StandardRoles.FOUNDER));
-		positions.add(position(StandardRoles.LEADER));
-		membersToPositions.put(leader, positions);
-		members.setMembers(membersToPositions);
-		return members;
-	}
+		Map<UUID, Membership> membersToPositions = new HashMap<>();
 
-	private Position position(StandardRoles role) {
-		Position position = new Position();
-		position.setRole(role.getName());
-		return position;
+		Membership membership = new Membership();
+		membership.setJoined(TemporalHelper.instantNow());
+		membership.setUniqueId(leader);
+
+		List<String> roles = new ArrayList<>();
+		roles.add(StandardRoles.FOUNDER.getName());
+		roles.add(StandardRoles.LEADER.getName());
+		membership.setRoles(roles);
+
+		membersToPositions.put(leader, membership);
+
+		members.setMembers(membersToPositions);
+
+		return members;
 	}
 
 	private MembershipComponent membership(Entity denizen) {

@@ -1,11 +1,15 @@
 package com.ulfric.plugin.factions.factions.members;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import org.apache.commons.collections4.MapUtils;
+import org.springframework.util.CollectionUtils;
 
 import com.ulfric.plugin.entities.Entity;
 import com.ulfric.plugin.entities.components.Component;
@@ -19,7 +23,7 @@ public class MembersComponent extends Component {
 	
 	public static final ComponentKey<MembersComponent> KEY = MembersComponentKey.INSTANCE;
 
-	public static Permissible getPermissions(Entity entity, UUID member) {
+	public static Permissible getPermissions(Entity entity, UUID member) { // TODO cleanup
 		if (entity == null || member == null) {
 			return EmptyPermissible.INSTANCE;
 		}
@@ -34,34 +38,60 @@ public class MembersComponent extends Component {
 			return EmptyPermissible.INSTANCE;
 		}
 
-		List<Permissible> permissions = members.getPositions(member)
-				.stream()
-				.map(Position::getRole)
+		Membership membership = members.getMembership(member);
+		if (membership == null) {
+			return EmptyPermissible.INSTANCE;
+		}
+
+		List<String> memberRoles = membership.getRoles();
+		if (CollectionUtils.isEmpty(memberRoles)) {
+			return EmptyPermissible.INSTANCE;
+		}
+
+		List<Permissible> permissions = memberRoles.stream()
 				.filter(Objects::nonNull)
 				.map(roles::getPermissibleByName)
 				.collect(Collectors.toList());
 
-		return permissions.isEmpty() ? EmptyPermissible.INSTANCE : new AggregatePermissible(permissions);
+		if (permissions.isEmpty()) {
+			return EmptyPermissible.INSTANCE;
+		}
+
+		if (permissions.size() == 1) {
+			return permissions.get(0);
+		}
+
+		return new AggregatePermissible(permissions);
 	}
 
-	private Map<UUID, List<Position>> members;
+	private Map<UUID, Membership> members;
 
-	public Map<UUID, List<Position>> getMembers() {
+	public Map<UUID, Membership> getMembers() {
 		return members;
 	}
 
-	public void setMembers(Map<UUID, List<Position>> members) {
+	public void setMembers(Map<UUID, Membership> members) {
 		this.members = members;
 	}
 
-	public List<Position> getPositions(UUID member) {
-		Map<UUID, List<Position>> members = getMembers();
+	public Membership getMembership(UUID member) {
+		Map<UUID, Membership> members = getMembers();
 
 		if (members == null) {
-			return Collections.emptyList();
+			return null;
 		}
 
-		return members.getOrDefault(member, Collections.emptyList());
+		return members.get(member);
+	}
+
+	public List<Membership> getMembersList() {
+		Map<UUID, Membership> members = getMembers();
+		if (MapUtils.isEmpty(members)) {
+			return Collections.emptyList();
+		}
+		List<Membership> sorted = new ArrayList<>(members.values());
+		Collections.sort(sorted);
+		return sorted;
 	}
 
 }
