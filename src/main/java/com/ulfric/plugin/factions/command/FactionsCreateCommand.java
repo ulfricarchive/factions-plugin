@@ -36,7 +36,7 @@ public class FactionsCreateCommand extends DenizenFactionsCommand { // TODO clea
 	private static final Pattern VALID_NAME = RegexHelper.compile("[a-zA-Z0-9]+"); // TODO configurable
 
 	@Argument(optional = true)
-	private String name;
+	protected String name;
 
 	@Override
 	public void run() {
@@ -110,7 +110,7 @@ public class FactionsCreateCommand extends DenizenFactionsCommand { // TODO clea
 		});
 	}
 
-	private NameComponent formalName() {
+	protected NameComponent formalName() {
 		NameComponent formalName = new NameComponent();
 		formalName.setName(name);
 		return formalName;

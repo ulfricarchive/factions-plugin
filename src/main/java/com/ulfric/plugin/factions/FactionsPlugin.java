@@ -5,6 +5,7 @@ import com.ulfric.plugin.Plugin;
 import com.ulfric.plugin.entities.components.ComponentKeys;
 import com.ulfric.plugin.factions.command.FactionsCommand;
 import com.ulfric.plugin.factions.command.FactionsCreateCommand;
+import com.ulfric.plugin.factions.command.FactionsCreateSystemCommand;
 import com.ulfric.plugin.factions.command.FactionsDescriptionColorCommand;
 import com.ulfric.plugin.factions.command.FactionsDescriptionCommand;
 import com.ulfric.plugin.factions.command.FactionsDisbandCommand;
@@ -23,6 +24,7 @@ import com.ulfric.plugin.factions.factions.members.function.MemberNameFunction;
 import com.ulfric.plugin.factions.factions.members.function.MemberRolesFunction;
 import com.ulfric.plugin.factions.factions.members.function.MembersFunction;
 import com.ulfric.plugin.factions.factions.roles.RolesComponent;
+import com.ulfric.plugin.factions.factions.system.SystemComponent;
 
 public class FactionsPlugin extends Plugin {
 
@@ -35,6 +37,7 @@ public class FactionsPlugin extends Plugin {
 		install(FactionsCommand.class);
 		install(FactionsHelpCommand.class);
 		install(FactionsCreateCommand.class);
+		install(FactionsCreateSystemCommand.class);
 		install(FactionsDescriptionCommand.class);
 		install(FactionsDescriptionColorCommand.class);
 		install(FactionsShowCommand.class);
@@ -45,6 +48,7 @@ public class FactionsPlugin extends Plugin {
 		ComponentKeys.register(MembershipComponent.KEY);
 		ComponentKeys.register(MembersComponent.KEY);
 		ComponentKeys.register(RolesComponent.KEY);
+		ComponentKeys.register(SystemComponent.KEY);
 
 		Function.register(new DescriptionFunction());
 		Function.register(new DescriptionTextFunction());
