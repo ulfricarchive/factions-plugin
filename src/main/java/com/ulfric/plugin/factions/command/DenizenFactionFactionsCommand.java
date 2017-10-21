@@ -1,8 +1,10 @@
 package com.ulfric.plugin.factions.command;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import com.ulfric.dragoon.rethink.response.Response;
 import com.ulfric.dragoon.stereotype.Stereotypes;
 import com.ulfric.plugin.entities.Entity;
 import com.ulfric.plugin.factions.Factions;
@@ -69,6 +71,10 @@ public abstract class DenizenFactionFactionsCommand extends DenizenFactionsComma
 
 	protected final void tellFaction(String message) {
 		Factions.tellFaction(faction, message, details());
+	}
+
+	protected final CompletableFuture<Response> saveFaction() {
+		return Factions.saveFaction(faction);
 	}
 
 }

@@ -7,7 +7,6 @@ import com.ulfric.dragoon.rethink.response.ResponseHelper;
 import com.ulfric.plugin.commands.Alias;
 import com.ulfric.plugin.commands.Permission;
 import com.ulfric.plugin.commands.argument.Argument;
-import com.ulfric.plugin.factions.Factions;
 import com.ulfric.plugin.factions.factions.description.DescriptionColor;
 import com.ulfric.plugin.factions.factions.description.DescriptionComponent;
 
@@ -34,7 +33,7 @@ public class FactionsDescriptionColorCommand extends FactionsDescriptionCommand 
 		}
 		description.setColor(color);
 
-		return Factions.saveDenizen(faction).whenComplete((saved, saveError) -> {
+		return saveFaction().whenComplete((saved, saveError) -> {
 			if (saveError != null || !ResponseHelper.changedData(saved)) {
 				tell("factions-description-color-save-error");
 			}

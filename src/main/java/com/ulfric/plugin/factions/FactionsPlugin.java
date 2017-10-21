@@ -10,6 +10,7 @@ import com.ulfric.plugin.factions.command.FactionsDescriptionColorCommand;
 import com.ulfric.plugin.factions.command.FactionsDescriptionCommand;
 import com.ulfric.plugin.factions.command.FactionsDisbandCommand;
 import com.ulfric.plugin.factions.command.FactionsHelpCommand;
+import com.ulfric.plugin.factions.command.FactionsInviteCommand;
 import com.ulfric.plugin.factions.command.FactionsShowCommand;
 import com.ulfric.plugin.factions.command.argument.DenizenResolver;
 import com.ulfric.plugin.factions.command.argument.FactionResolver;
@@ -18,6 +19,7 @@ import com.ulfric.plugin.factions.factions.description.DescriptionComponent;
 import com.ulfric.plugin.factions.factions.description.function.DescriptionColorFunction;
 import com.ulfric.plugin.factions.factions.description.function.DescriptionFunction;
 import com.ulfric.plugin.factions.factions.description.function.DescriptionTextFunction;
+import com.ulfric.plugin.factions.factions.invitations.InvitationsComponent;
 import com.ulfric.plugin.factions.factions.members.MembersComponent;
 import com.ulfric.plugin.factions.factions.members.function.MemberJoinedFunction;
 import com.ulfric.plugin.factions.factions.members.function.MemberNameFunction;
@@ -42,6 +44,7 @@ public class FactionsPlugin extends Plugin {
 		install(FactionsDescriptionColorCommand.class);
 		install(FactionsShowCommand.class);
 		install(FactionsDisbandCommand.class);
+		install(FactionsInviteCommand.class);
 
 		// TODO use feature wrappers
 		ComponentKeys.register(DescriptionComponent.KEY);
@@ -49,6 +52,7 @@ public class FactionsPlugin extends Plugin {
 		ComponentKeys.register(MembersComponent.KEY);
 		ComponentKeys.register(RolesComponent.KEY);
 		ComponentKeys.register(SystemComponent.KEY);
+		ComponentKeys.register(InvitationsComponent.KEY);
 
 		Function.register(new DescriptionFunction());
 		Function.register(new DescriptionTextFunction());

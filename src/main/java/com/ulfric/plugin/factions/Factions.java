@@ -5,8 +5,10 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import com.ulfric.dragoon.extension.inject.Inject;
+import com.ulfric.dragoon.rethink.DocumentHelper;
 import com.ulfric.dragoon.rethink.Instance;
 import com.ulfric.dragoon.rethink.response.Response;
 import com.ulfric.dragoon.rethink.response.ResponseHelper;
@@ -81,6 +83,25 @@ public class Factions implements Service<Factions> {
 			.map(Bukkit::getPlayer)
 			.filter(Objects::nonNull)
 			.forEach(member -> tell.send(member, message, details));
+	}
+
+	public static void tellDenizen(Entity denizen, String message) {
+		tellDenizen(denizen, message, Details.none());
+	}
+
+	public static void tellDenizen(Entity denizen, String message, Details details) {
+		UUID uniqueId = DocumentHelper.getUniqueId(denizen);
+
+		if (uniqueId == null) {
+			return;
+		}
+
+		Player player = Bukkit.getPlayer(uniqueId);
+		if (player == null) {
+			return;
+		}
+
+		TellService.sendMessage(player, message, details);
 	}
 
 	@Inject

@@ -13,7 +13,6 @@ import com.ulfric.commons.text.RegexHelper;
 import com.ulfric.dragoon.rethink.response.ResponseHelper;
 import com.ulfric.plugin.commands.Alias;
 import com.ulfric.plugin.entities.components.Component;
-import com.ulfric.plugin.factions.Factions;
 import com.ulfric.plugin.factions.factions.description.DescriptionComponent;
 
 @Name("description")
@@ -57,7 +56,7 @@ public class FactionsDescriptionCommand extends DenizenFactionFactionsCommand {
 			description.setDescription(newDescription);
 		}
 
-		return Factions.saveDenizen(faction).whenComplete((saved, saveError) -> {
+		return saveFaction().whenComplete((saved, saveError) -> {
 			if (saveError != null || !ResponseHelper.changedData(saved)) {
 				if (newDescription == null) {
 					tell("factions-description-delete-save-error");
