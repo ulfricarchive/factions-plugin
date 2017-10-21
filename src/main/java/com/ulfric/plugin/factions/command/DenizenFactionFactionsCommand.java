@@ -5,6 +5,7 @@ import java.util.concurrent.Future;
 
 import com.ulfric.dragoon.stereotype.Stereotypes;
 import com.ulfric.plugin.entities.Entity;
+import com.ulfric.plugin.factions.Factions;
 import com.ulfric.plugin.factions.denizens.membership.MembershipComponent;
 import com.ulfric.plugin.factions.factions.members.MembersComponent;
 
@@ -64,6 +65,10 @@ public abstract class DenizenFactionFactionsCommand extends DenizenFactionsComma
 	protected final boolean hasFactionPermission(String permission) {
 		permission = permission.toLowerCase();
 		return MembersComponent.getPermissions(faction, uniqueId()).hasPermission(permission);
+	}
+
+	protected final void tellFaction(String message) {
+		Factions.tellFaction(faction, message, details());
 	}
 
 }

@@ -39,8 +39,7 @@ public class FactionsDescriptionColorCommand extends FactionsDescriptionCommand 
 				tell("factions-description-color-save-error");
 			}
 
-			// TODO tell the whole faction?
-			tell("factions-description-color-saved");
+			tellFaction("factions-description-color-saved");
 		});
 	}
 

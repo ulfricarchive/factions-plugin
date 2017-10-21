@@ -70,9 +70,9 @@ public class FactionsDescriptionCommand extends DenizenFactionFactionsCommand {
 
 			// TODO tell the whole faction?
 			if (newDescription == null) {
-				tell("factions-description-deleted");
+				tellFaction("factions-description-deleted");
 			} else {
-				tell("factions-description-saved");
+				tellFaction("factions-description-saved");
 			}
 		});
 	}

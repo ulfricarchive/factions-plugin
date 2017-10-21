@@ -21,7 +21,7 @@ public class FactionsDisbandCommand extends DenizenFactionFactionsCommand {
 				return;
 			}
 
-			Factions.tellFaction(faction, "factions-disbanded", details());
+			tellFaction("factions-disbanded");
 		});
 	}
 
