@@ -7,6 +7,7 @@ import com.ulfric.plugin.factions.command.FactionsCommand;
 import com.ulfric.plugin.factions.command.FactionsCreateCommand;
 import com.ulfric.plugin.factions.command.FactionsDescriptionColorCommand;
 import com.ulfric.plugin.factions.command.FactionsDescriptionCommand;
+import com.ulfric.plugin.factions.command.FactionsDisbandCommand;
 import com.ulfric.plugin.factions.command.FactionsHelpCommand;
 import com.ulfric.plugin.factions.command.FactionsShowCommand;
 import com.ulfric.plugin.factions.command.argument.DenizenResolver;
@@ -37,6 +38,7 @@ public class FactionsPlugin extends Plugin {
 		install(FactionsDescriptionCommand.class);
 		install(FactionsDescriptionColorCommand.class);
 		install(FactionsShowCommand.class);
+		install(FactionsDisbandCommand.class);
 
 		// TODO use feature wrappers
 		ComponentKeys.register(DescriptionComponent.KEY);
