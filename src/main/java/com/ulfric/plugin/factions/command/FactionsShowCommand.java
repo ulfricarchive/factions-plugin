@@ -15,7 +15,7 @@ import com.ulfric.plugin.factions.command.argument.Faction;
 @Alias({"information", "info", "who", "details", "s"})
 @Asynchronous
 // TODO cooldown - Limit of 50 per 10 minutes
-public class FactionsShowCommand extends DenizenFactionFactionsCommand { // TODO cleanup, integrate with Rules / Control
+public class FactionsShowCommand extends DenizenFactionFactionsCommand {
 
 	@Faction
 	@Argument(optional = true)
