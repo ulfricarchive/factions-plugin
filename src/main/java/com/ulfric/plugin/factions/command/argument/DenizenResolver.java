@@ -6,6 +6,7 @@ import com.ulfric.commons.bukkit.player.PlayerHelper;
 import com.ulfric.dragoon.extension.inject.Inject;
 import com.ulfric.dragoon.rethink.Instance;
 import com.ulfric.dragoon.rethink.Location;
+import com.ulfric.dragoon.stereotype.Stereotypes;
 import com.ulfric.plugin.commands.argument.ResolutionRequest;
 import com.ulfric.plugin.commands.argument.Resolver;
 import com.ulfric.plugin.entities.Entity;
@@ -22,6 +23,10 @@ public class DenizenResolver extends Resolver<Entity> {
 
 	@Override
 	public Entity apply(ResolutionRequest request) {
+		if (!isApplicable(request)) {
+			return null;
+		}
+
 		String key = request.getArgument();
 
 		UUID uniqueId = PlayerHelper.getCachedUniqueId(key);
@@ -31,6 +36,10 @@ public class DenizenResolver extends Resolver<Entity> {
 		}
 
 		return null;
+	}
+
+	protected boolean isApplicable(ResolutionRequest request) {
+		return Stereotypes.isPresent(request.getDefinition().getField(), Denizen.class);
 	}
 
 }
