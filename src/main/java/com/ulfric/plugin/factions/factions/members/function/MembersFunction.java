@@ -23,7 +23,7 @@ public class MembersFunction extends Function<Entity> {
 			return null;
 		}
 
-		List<Membership> members = component.getMembersList();
+		List<Membership> members = component.getSortedMembersList();
 		if (CollectionUtils.isEmpty(members)) {
 			return null;
 		}

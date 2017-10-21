@@ -5,7 +5,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.MapUtils;
@@ -14,6 +16,7 @@ import org.springframework.util.CollectionUtils;
 import com.ulfric.plugin.entities.Entity;
 import com.ulfric.plugin.entities.components.Component;
 import com.ulfric.plugin.entities.components.ComponentKey;
+import com.ulfric.plugin.factions.Factions;
 import com.ulfric.plugin.factions.factions.roles.AggregatePermissible;
 import com.ulfric.plugin.factions.factions.roles.EmptyPermissible;
 import com.ulfric.plugin.factions.factions.roles.Permissible;
@@ -84,7 +87,7 @@ public class MembersComponent extends Component {
 		return members.get(member);
 	}
 
-	public List<Membership> getMembersList() {
+	public List<Membership> getSortedMembersList() {
 		Map<UUID, Membership> members = getMembers();
 		if (MapUtils.isEmpty(members)) {
 			return Collections.emptyList();
@@ -92,6 +95,24 @@ public class MembersComponent extends Component {
 		List<Membership> sorted = new ArrayList<>(members.values());
 		Collections.sort(sorted);
 		return sorted;
+	}
+
+	public Set<UUID> getMembersSet() {
+		Map<UUID, Membership> members = getMembers();
+		if (MapUtils.isEmpty(members)) {
+			return Collections.emptySet();
+		}
+		return members.keySet();
+	}
+
+	public List<Entity> getMemberEntities(Factions factions) {
+		return getMembersSet()
+				.stream()
+				.map(factions::getDenizenByUniqueId)
+				.filter(Objects::nonNull)
+				.map(CompletableFuture::join)
+				.filter(Objects::nonNull)
+				.collect(Collectors.toList());
 	}
 
 }
