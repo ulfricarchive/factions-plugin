@@ -13,6 +13,7 @@ import com.ulfric.plugin.factions.command.FactionsHelpCommand;
 import com.ulfric.plugin.factions.command.FactionsInviteCommand;
 import com.ulfric.plugin.factions.command.FactionsInvitesCommand;
 import com.ulfric.plugin.factions.command.FactionsShowCommand;
+import com.ulfric.plugin.factions.command.FactionsUninviteCommand;
 import com.ulfric.plugin.factions.command.argument.DenizenResolver;
 import com.ulfric.plugin.factions.command.argument.FactionResolver;
 import com.ulfric.plugin.factions.denizens.membership.MembershipComponent;
@@ -51,6 +52,7 @@ public class FactionsPlugin extends Plugin {
 		install(FactionsDisbandCommand.class);
 		install(FactionsInviteCommand.class);
 		install(FactionsInvitesCommand.class);
+		install(FactionsUninviteCommand.class);
 
 		// TODO use feature wrappers
 		ComponentKeys.register(DescriptionComponent.KEY);
