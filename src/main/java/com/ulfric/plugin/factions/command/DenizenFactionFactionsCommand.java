@@ -36,7 +36,7 @@ public abstract class DenizenFactionFactionsCommand extends DenizenFactionsComma
 				return FutureHelper.empty();
 			}
 
-			CompletableFuture<?> run = runAsFaction(); // TODO there's a berrwe way to do this
+			CompletableFuture<?> run = runAsFaction();
 
 			if (run == null) {
 				return FutureHelper.empty();
