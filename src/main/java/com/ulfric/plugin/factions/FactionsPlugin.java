@@ -11,6 +11,7 @@ import com.ulfric.plugin.factions.command.FactionsDescriptionCommand;
 import com.ulfric.plugin.factions.command.FactionsDisbandCommand;
 import com.ulfric.plugin.factions.command.FactionsHelpCommand;
 import com.ulfric.plugin.factions.command.FactionsInviteCommand;
+import com.ulfric.plugin.factions.command.FactionsInvitesCommand;
 import com.ulfric.plugin.factions.command.FactionsShowCommand;
 import com.ulfric.plugin.factions.command.argument.DenizenResolver;
 import com.ulfric.plugin.factions.command.argument.FactionResolver;
@@ -20,6 +21,10 @@ import com.ulfric.plugin.factions.factions.description.function.DescriptionColor
 import com.ulfric.plugin.factions.factions.description.function.DescriptionFunction;
 import com.ulfric.plugin.factions.factions.description.function.DescriptionTextFunction;
 import com.ulfric.plugin.factions.factions.invitations.InvitationsComponent;
+import com.ulfric.plugin.factions.factions.invitations.function.InvitationDateFunction;
+import com.ulfric.plugin.factions.factions.invitations.function.InvitationInvitedFunction;
+import com.ulfric.plugin.factions.factions.invitations.function.InvitationInviterFunction;
+import com.ulfric.plugin.factions.factions.invitations.function.InvitationsFunction;
 import com.ulfric.plugin.factions.factions.members.MembersComponent;
 import com.ulfric.plugin.factions.factions.members.function.MemberJoinedFunction;
 import com.ulfric.plugin.factions.factions.members.function.MemberNameFunction;
@@ -45,6 +50,7 @@ public class FactionsPlugin extends Plugin {
 		install(FactionsShowCommand.class);
 		install(FactionsDisbandCommand.class);
 		install(FactionsInviteCommand.class);
+		install(FactionsInvitesCommand.class);
 
 		// TODO use feature wrappers
 		ComponentKeys.register(DescriptionComponent.KEY);
@@ -61,6 +67,10 @@ public class FactionsPlugin extends Plugin {
 		Function.register(new MemberNameFunction());
 		Function.register(new MemberRolesFunction());
 		Function.register(new MemberJoinedFunction());
+		Function.register(new InvitationsFunction());
+		Function.register(new InvitationDateFunction());
+		Function.register(new InvitationInviterFunction());
+		Function.register(new InvitationInvitedFunction());
 	}
 
 }
