@@ -34,6 +34,7 @@ import com.ulfric.plugin.factions.factions.members.function.MemberNameFunction;
 import com.ulfric.plugin.factions.factions.members.function.MemberRolesFunction;
 import com.ulfric.plugin.factions.factions.members.function.MembersFunction;
 import com.ulfric.plugin.factions.factions.roles.RolesComponent;
+import com.ulfric.plugin.factions.factions.score.ScoreComponent;
 import com.ulfric.plugin.factions.factions.system.SystemComponent;
 
 public class FactionsPlugin extends Plugin {
@@ -65,6 +66,7 @@ public class FactionsPlugin extends Plugin {
 		ComponentKeys.register(RolesComponent.KEY);
 		ComponentKeys.register(SystemComponent.KEY);
 		ComponentKeys.register(InvitationsComponent.KEY);
+		ComponentKeys.register(ScoreComponent.KEY);
 
 		Function.register(new DescriptionFunction());
 		Function.register(new DescriptionTextFunction());
