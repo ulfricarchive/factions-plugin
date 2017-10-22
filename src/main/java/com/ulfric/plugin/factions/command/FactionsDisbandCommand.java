@@ -1,12 +1,13 @@
 package com.ulfric.plugin.factions.command;
 
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 import com.ulfric.commons.naming.Name;
 import com.ulfric.dragoon.rethink.response.ResponseHelper;
 import com.ulfric.plugin.commands.confirmation.RequireConfirmation;
 import com.ulfric.plugin.factions.Factions;
+import com.ulfric.plugin.factions.command.exception.FactionSaveException;
 
 @Name("disband")
 @FactionsPermission("disband")
@@ -14,11 +15,10 @@ import com.ulfric.plugin.factions.Factions;
 public class FactionsDisbandCommand extends DenizenFactionFactionsCommand {
 
 	@Override
-	public Future<?> runAsFaction() {
-		return Factions.disbandFaction(faction).whenComplete((saved, saveError) -> {
-			if (saveError != null || !ResponseHelper.changedData(saved)) {
-				tell("factions-disband-save-error");
-				return;
+	public CompletableFuture<?> runAsFaction() {
+		return Factions.disbandFaction(faction).thenAccept(saved -> {
+			if (!ResponseHelper.changedData(saved)) {
+				throw new FactionSaveException("Failed to disband faction", saved);
 			}
 
 			tellFaction("factions-disbanded");

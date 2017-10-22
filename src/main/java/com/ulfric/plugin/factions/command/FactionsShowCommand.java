@@ -1,6 +1,6 @@
 package com.ulfric.plugin.factions.command;
 
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -19,11 +19,11 @@ public class FactionsShowCommand extends DenizenFactionFactionsCommand {
 
 	@Faction
 	@Argument(optional = true)
-	private Entity target;
+	private Entity resolvedFaction;
 
 	@Override
-	public Future<?> runAsDenizen() {
-		if (target == null) {
+	public CompletableFuture<?> runAsDenizen() {
+		if (resolvedFaction == null) {
 			if (triedToResolve()) {
 				tell("factions-show-not-found");
 				return null;
@@ -32,12 +32,12 @@ public class FactionsShowCommand extends DenizenFactionFactionsCommand {
 			return super.runAsDenizen();
 		}
 
-		faction = target;
+		faction = resolvedFaction;
 		return runAsFaction();
 	}
 
 	@Override
-	public Future<?> runAsFaction() {
+	public CompletableFuture<?> runAsFaction() {
 		tell("factions-show");
 
 		return null;

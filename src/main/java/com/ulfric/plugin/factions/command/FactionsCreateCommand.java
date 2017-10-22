@@ -5,16 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.util.concurrent.Futures;
+import com.ulfric.commons.concurrent.FutureHelper;
 import com.ulfric.commons.naming.Name;
 import com.ulfric.commons.text.RegexHelper;
 import com.ulfric.commons.time.TemporalHelper;
-import com.ulfric.dragoon.rethink.response.Response;
 import com.ulfric.dragoon.rethink.response.ResponseHelper;
 import com.ulfric.i18n.content.Details;
 import com.ulfric.plugin.commands.Alias;
@@ -22,7 +21,7 @@ import com.ulfric.plugin.commands.argument.Argument;
 import com.ulfric.plugin.entities.Entity;
 import com.ulfric.plugin.entities.components.name.NameComponent;
 import com.ulfric.plugin.factions.Factions;
-import com.ulfric.plugin.factions.command.exception.FactionCreateException;
+import com.ulfric.plugin.factions.command.exception.FactionSaveException;
 import com.ulfric.plugin.factions.denizens.membership.MembershipComponent;
 import com.ulfric.plugin.factions.factions.members.MembersComponent;
 import com.ulfric.plugin.factions.factions.members.Membership;
@@ -37,6 +36,8 @@ public class FactionsCreateCommand extends DenizenFactionsCommand { // TODO clea
 
 	@Argument(optional = true)
 	protected String name;
+
+	protected Entity faction;
 
 	@Override
 	public void run() {
@@ -60,25 +61,27 @@ public class FactionsCreateCommand extends DenizenFactionsCommand { // TODO clea
 	}
 
 	@Override
-	public Future<?> runAsDenizen() {
+	public CompletableFuture<?> runAsDenizen() {
 		MembershipComponent membership = membership(denizen);
 		if (StringUtils.isNotEmpty(membership.getFaction())) {
 			tell("factions-create-already-member");
 			return null;
 		}
 
-		return Factions.getFaction(name).whenComplete((faction, createError) -> {
-			if (createError != null || faction == null) {
+		return Factions.getFaction(name).thenCompose(faction -> {
+			if (faction == null) {
 				tell("factions-create-failed");
-				return;
+				return FutureHelper.empty();
 			}
+
+			this.faction = faction;
 
 			Details details = details();
 			details.add("faction", faction);
 
 			if (faction.hasComponent(MembersComponent.KEY)) {
 				tell("factions-create-already-exists", details);
-				return;
+				return FutureHelper.empty();
 			}
 
 			faction.addComponent(createMembers(uniqueId()));
@@ -86,27 +89,19 @@ public class FactionsCreateCommand extends DenizenFactionsCommand { // TODO clea
 
 			membership.setFactionByEntity(faction);
 
-			Future<?> factionWait = Factions.saveFaction(faction)
+			return Factions.saveFaction(faction)
 					.thenAccept(response -> {
 						if (!ResponseHelper.changedData(response)) {
-							throw new FactionCreateException("Failed to save faction", response);
-						}
-					}).thenApply(ignore -> {
-						Future<Response> denizenWait = Factions.saveDenizen(denizen);
-						return Futures.getUnchecked(denizenWait);
-					}).thenAccept(response -> {
-						if (!ResponseHelper.changedData(response)) {
-							throw new FactionCreateException("Failed to save denizen", response);
+							throw new FactionSaveException("Failed to save faction", response);
 						}
 					})
-					.thenRun(() -> tell("factions-create", details))
-					.exceptionally(exception -> {
-						exception.printStackTrace(); // TODO error handling
-						details.add("error", exception);
-						tell("factions-error-save", details);
-						return null;
-					});
-			Futures.getUnchecked(factionWait);
+					.thenCompose(ignore -> Factions.saveDenizen(denizen))
+					.thenAccept(response -> {
+						if (!ResponseHelper.changedData(response)) {
+							throw new FactionSaveException("Failed to save denizen", response);
+						}
+					})
+					.thenRun(() -> tell("factions-create", details));
 		});
 	}
 

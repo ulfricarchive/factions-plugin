@@ -2,7 +2,7 @@ package com.ulfric.plugin.factions.command;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -10,9 +10,11 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import com.ulfric.commons.naming.Name;
 import com.ulfric.commons.text.RegexHelper;
+import com.ulfric.commons.time.TemporalHelper;
 import com.ulfric.dragoon.rethink.response.ResponseHelper;
 import com.ulfric.plugin.commands.Alias;
 import com.ulfric.plugin.entities.components.Component;
+import com.ulfric.plugin.factions.command.exception.FactionSaveException;
 import com.ulfric.plugin.factions.factions.description.DescriptionComponent;
 
 @Name("description")
@@ -25,7 +27,7 @@ public class FactionsDescriptionCommand extends DenizenFactionFactionsCommand {
 	private String newDescription;
 
 	@Override
-	public Future<?> runAsFaction() {
+	public CompletableFuture<?> runAsFaction() {
 		loadDescriptionFromContext();
 
 		if (newDescription == null) {
@@ -52,19 +54,14 @@ public class FactionsDescriptionCommand extends DenizenFactionFactionsCommand {
 				description = new DescriptionComponent();
 				faction.addComponent(description);
 			}
-			description.setWrittenBy(uniqueId());
+			description.setAuthor(uniqueId());
 			description.setDescription(newDescription);
+			description.setDateWritten(TemporalHelper.instantNow());
 		}
 
-		return saveFaction().whenComplete((saved, saveError) -> {
-			if (saveError != null || !ResponseHelper.changedData(saved)) {
-				if (newDescription == null) {
-					tell("factions-description-delete-save-error");
-				} else {
-					tell("factions-description-save-error");
-				}
-
-				return;
+		return saveFaction().thenAccept(saved -> {
+			if (!ResponseHelper.changedData(saved)) {
+				throw new FactionSaveException("Failed to save description changes", saved);
 			}
 
 			// TODO tell the whole faction?

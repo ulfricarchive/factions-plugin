@@ -1,9 +1,8 @@
 package com.ulfric.plugin.factions.command;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
+import com.ulfric.commons.concurrent.FutureHelper;
 import com.ulfric.dragoon.rethink.response.Response;
 import com.ulfric.plugin.entities.Entity;
 import com.ulfric.plugin.factions.Factions;
@@ -14,28 +13,27 @@ public abstract class DenizenFactionsCommand extends FactionsCommand {
 
 	@Override
 	public void run() {
-		Factions.getDenizen(uniqueId()).whenComplete((denizen, error) -> {
-			if (error != null || denizen == null) {
+		Factions.getDenizen(uniqueId()).thenCompose(denizen -> {
+			if (denizen == null) {
 				tell("factions-error-denizen-not-found");
-				return;
+				return FutureHelper.empty();
 			}
 
 			this.denizen = denizen;
-			Future<?> run = runAsDenizen();
+			CompletableFuture<?> run = runAsDenizen();
 
 			if (run == null) {
-				return;
+				return FutureHelper.empty();
 			}
 
-			try {
-				run.get();
-			} catch (InterruptedException | ExecutionException e) {
-				throw new RuntimeException(e); // TODO error handling
-			}
+			return run;
+		}).exceptionally(thrown -> {
+			internalError("factions-internal-error", thrown);
+			return null;
 		});
 	}
 
-	public abstract Future<?> runAsDenizen();
+	public abstract CompletableFuture<?> runAsDenizen();
 
 	protected final CompletableFuture<Response> saveDenizen() {
 		return Factions.saveDenizen(denizen);

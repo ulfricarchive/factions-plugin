@@ -1,7 +1,7 @@
 package com.ulfric.plugin.factions.command;
 
 import java.util.UUID;
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 
 import com.ulfric.dragoon.rethink.DocumentHelper;
 import com.ulfric.plugin.commands.argument.Argument;
@@ -17,7 +17,7 @@ public abstract class DenizenFactionTargetFactionsCommand extends DenizenFaction
 	protected UUID targetUniqueId;
 
 	@Override
-	public Future<?> runAsDenizen() {
+	public CompletableFuture<?> runAsDenizen() {
 		if (denizen.equals(target)) {
 			tell("factions-cannot-be-self");
 			return null;

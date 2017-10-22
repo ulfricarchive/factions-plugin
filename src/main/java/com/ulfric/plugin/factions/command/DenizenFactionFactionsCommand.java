@@ -1,9 +1,8 @@
 package com.ulfric.plugin.factions.command;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
+import com.ulfric.commons.concurrent.FutureHelper;
 import com.ulfric.dragoon.rethink.response.Response;
 import com.ulfric.dragoon.stereotype.Stereotypes;
 import com.ulfric.plugin.entities.Entity;
@@ -13,11 +12,10 @@ import com.ulfric.plugin.factions.factions.members.MembersComponent;
 
 public abstract class DenizenFactionFactionsCommand extends DenizenFactionsCommand {
 
-	protected Entity denizen;
 	protected Entity faction;
 
 	@Override
-	public Future<?> runAsDenizen() {
+	public CompletableFuture<?> runAsDenizen() {
 		MembershipComponent membership = denizen.getComponent(MembershipComponent.KEY);
 
 		if (membership == null) {
@@ -25,34 +23,30 @@ public abstract class DenizenFactionFactionsCommand extends DenizenFactionsComma
 			return null;
 		}
 
-		return membership.getFactionEntity().whenComplete((faction, error) -> {
-			if (error != null || faction == null) {
-				tell("factions-error-faction-not-found");
-				return;
+		return membership.getFactionEntity().thenCompose(faction -> {
+			if (faction == null) {
+				tell("factions-faction-not-found");
+				return FutureHelper.empty();
 			}
 
 			this.faction = faction;
 
 			if (!hasFactionPermissions()) {
 				tell("factions-no-permission");
-				return;
+				return FutureHelper.empty();
 			}
 
-			Future<?> run = runAsFaction();
+			CompletableFuture<?> run = runAsFaction(); // TODO there's a berrwe way to do this
 
 			if (run == null) {
-				return;
+				return FutureHelper.empty();
 			}
 
-			try {
-				run.get();
-			} catch (InterruptedException | ExecutionException e) {
-				throw new RuntimeException(e); // TODO error handling
-			}
+			return run;
 		});
 	}
 
-	public abstract Future<?> runAsFaction();
+	public abstract CompletableFuture<?> runAsFaction();
 
 	protected final boolean hasFactionPermissions() {
 		for (FactionsPermission permission : Stereotypes.getAll(getClass(), FactionsPermission.class)) {

@@ -1,5 +1,6 @@
 package com.ulfric.plugin.factions.factions.description;
 
+import java.time.Instant;
 import java.util.UUID;
 
 import com.ulfric.plugin.entities.components.Component;
@@ -7,11 +8,16 @@ import com.ulfric.plugin.entities.components.ComponentKey;
 
 public class DescriptionComponent extends Component {
 
+	public static ComponentKey<DescriptionComponent> getKey() {
+		return KEY;
+	}
+
 	public static final ComponentKey<DescriptionComponent> KEY = DescriptionComponentKey.INSTANCE;
 
 	private String description;
 	private DescriptionColor color;
-	private UUID writtenBy;
+	private UUID author;
+	private Instant dateWritten;
 
 	public String getDescription() {
 		return description;
@@ -29,12 +35,20 @@ public class DescriptionComponent extends Component {
 		this.color = color;
 	}
 
-	public UUID getWrittenBy() {
-		return writtenBy;
+	public UUID getAuthor() {
+		return author;
 	}
 
-	public void setWrittenBy(UUID writtenBy) {
-		this.writtenBy = writtenBy;
+	public void setAuthor(UUID author) {
+		this.author = author;
+	}
+
+	public Instant getDateWritten() {
+		return dateWritten;
+	}
+
+	public void setDateWritten(Instant dateWritten) {
+		this.dateWritten = dateWritten;
 	}
 
 }
