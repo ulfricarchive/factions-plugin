@@ -1,7 +1,6 @@
 package com.ulfric.plugin.factions.command.argument;
 
 import com.ulfric.dragoon.extension.inject.Inject;
-import com.ulfric.dragoon.rethink.Instance;
 import com.ulfric.dragoon.stereotype.Stereotypes;
 import com.ulfric.plugin.commands.argument.ResolutionRequest;
 import com.ulfric.plugin.entities.Entity;
@@ -32,8 +31,7 @@ public class FactionResolver extends DenizenResolver {
 	}
 
 	private Entity lookupFaction(String argument) {
-		Instance<Entity> cached = factions.getCachedEntity(argument);
-		return cached == null ? null : cached.get();
+		return factions.getCachedEntity(argument);
 	}
 
 	@Override

@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import com.ulfric.commons.bukkit.player.PlayerHelper;
 import com.ulfric.dragoon.extension.inject.Inject;
-import com.ulfric.dragoon.rethink.Instance;
 import com.ulfric.dragoon.rethink.Location;
 import com.ulfric.dragoon.stereotype.Stereotypes;
 import com.ulfric.plugin.commands.argument.ResolutionRequest;
@@ -31,8 +30,7 @@ public class DenizenResolver extends Resolver<Entity> {
 
 		UUID uniqueId = PlayerHelper.getCachedUniqueId(key);
 		if (uniqueId != null) {
-			Instance<Entity> cached = denizens.getCachedEntity(Location.key(uniqueId));
-			return cached == null ? null : cached.get();
+			return denizens.getCachedEntity(Location.key(uniqueId));
 		}
 
 		return null;
