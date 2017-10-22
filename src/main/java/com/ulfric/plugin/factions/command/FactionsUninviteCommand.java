@@ -4,18 +4,11 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.Future;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.ulfric.commons.naming.Name;
-import com.ulfric.commons.value.UniqueIdHelper;
 import com.ulfric.dragoon.extension.intercept.asynchronous.Asynchronous;
-import com.ulfric.dragoon.rethink.Location;
 import com.ulfric.dragoon.rethink.response.ResponseHelper;
 import com.ulfric.plugin.commands.Alias;
-import com.ulfric.plugin.commands.argument.Argument;
-import com.ulfric.plugin.entities.Entity;
 import com.ulfric.plugin.factions.Factions;
-import com.ulfric.plugin.factions.command.argument.Denizen;
 import com.ulfric.plugin.factions.factions.invitations.Invitation;
 import com.ulfric.plugin.factions.factions.invitations.InvitationsComponent;
 
@@ -23,31 +16,9 @@ import com.ulfric.plugin.factions.factions.invitations.InvitationsComponent;
 @Alias({"uninv", "deinv", "deinvite"})
 @Asynchronous
 @FactionsPermission("deinvite")
-public class FactionsUninviteCommand extends DenizenFactionFactionsCommand {
-
-	@Denizen
-	@Argument
-	private Entity invite;
+public class FactionsUninviteCommand extends DenizenFactionTargetFactionsCommand {
 
 	private Invitation invitation;
-
-	private UUID deinvitedUniqueId;
-
-	@Override
-	public Future<?> runAsDenizen() {
-		if (denizen.equals(invite)) {
-			tell("factions-deinvite-cannot-be-self");
-			return null;
-		}
-
-		resolveUniqueIdOfInvite();
-		if (deinvitedUniqueId == null) {
-			tell("factions-deinvite-could-not-find-denizen-id");
-			return null;
-		}
-
-		return super.runAsDenizen();
-	}
 
 	@Override
 	public Future<?> runAsFaction() {
@@ -64,7 +35,7 @@ public class FactionsUninviteCommand extends DenizenFactionFactionsCommand {
 			return null;
 		}
 
-		invitation = invitations.remove(deinvitedUniqueId);
+		invitation = invitations.remove(targetUniqueId);
 		if (invitation == null) {
 			tell("factions-deinvite-not-invited");
 			return null;
@@ -79,22 +50,8 @@ public class FactionsUninviteCommand extends DenizenFactionFactionsCommand {
 			}
 
 			tellFaction("factions-deinvited");
-			Factions.tellDenizen(invite, "factions-deinvited-to", details());
+			Factions.tellDenizen(target, "factions-deinvited-to", details());
 		});
-	}
-
-	private void resolveUniqueIdOfInvite() {
-		Location location = invite.getLocation();
-		if (location == null) {
-			return;
-		}
-
-		String key = location.getKey();
-		if (StringUtils.isEmpty(key)) {
-			return;
-		}
-
-		deinvitedUniqueId = UniqueIdHelper.parseUniqueId(key);
 	}
 
 }

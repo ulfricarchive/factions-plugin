@@ -26,17 +26,17 @@ public class MembersComponent extends Component {
 	
 	public static final ComponentKey<MembersComponent> KEY = MembersComponentKey.INSTANCE;
 
-	public static Permissible getPermissions(Entity entity, UUID member) { // TODO cleanup
-		if (entity == null || member == null) {
+	public static Permissible getPermissions(Entity faction, UUID member) { // TODO cleanup
+		if (faction == null || member == null) {
 			return EmptyPermissible.INSTANCE;
 		}
 
-		MembersComponent members = entity.getComponent(MembersComponent.KEY);
+		MembersComponent members = faction.getComponent(MembersComponent.KEY);
 		if (members == null) {
 			return EmptyPermissible.INSTANCE;
 		}
 
-		RolesComponent roles = entity.getComponent(RolesComponent.KEY);
+		RolesComponent roles = faction.getComponent(RolesComponent.KEY);
 		if (roles == null) {
 			return EmptyPermissible.INSTANCE;
 		}

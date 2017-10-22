@@ -12,6 +12,7 @@ import com.ulfric.plugin.factions.command.FactionsDisbandCommand;
 import com.ulfric.plugin.factions.command.FactionsHelpCommand;
 import com.ulfric.plugin.factions.command.FactionsInviteCommand;
 import com.ulfric.plugin.factions.command.FactionsInvitesCommand;
+import com.ulfric.plugin.factions.command.FactionsKickCommand;
 import com.ulfric.plugin.factions.command.FactionsShowCommand;
 import com.ulfric.plugin.factions.command.FactionsUninviteCommand;
 import com.ulfric.plugin.factions.command.argument.DenizenResolver;
@@ -53,6 +54,7 @@ public class FactionsPlugin extends Plugin {
 		install(FactionsInviteCommand.class);
 		install(FactionsInvitesCommand.class);
 		install(FactionsUninviteCommand.class);
+		install(FactionsKickCommand.class);
 
 		// TODO use feature wrappers
 		ComponentKeys.register(DescriptionComponent.KEY);
