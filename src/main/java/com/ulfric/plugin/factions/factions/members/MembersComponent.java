@@ -2,6 +2,7 @@ package com.ulfric.plugin.factions.factions.members;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -25,6 +26,26 @@ import com.ulfric.plugin.factions.factions.roles.RolesComponent;
 public class MembersComponent extends Component {
 	
 	public static final ComponentKey<MembersComponent> KEY = MembersComponentKey.INSTANCE;
+
+	public static List<UUID> getLeaders(Entity faction) { // TODO cleanup
+		if (faction == null) {
+			return Collections.emptyList();
+		}
+
+		MembersComponent members = faction.getComponent(MembersComponent.KEY);
+		if (members == null || members.members == null) {
+			return Collections.emptyList();
+		}
+
+		Map<Integer, List<UUID>> rankToMembers = new HashMap<>();
+		members.members.keySet().forEach(member ->
+			rankToMembers.computeIfAbsent(getPermissions(faction, member).getWorth(),
+					ignore -> new ArrayList<>()).add(member));
+
+		int highestRank = rankToMembers.keySet().stream().mapToInt(Integer::intValue).max().orElse(0);
+		List<UUID> highest = rankToMembers.get(highestRank);
+		return highest == null ? Collections.emptyList() : highest;
+	}
 
 	public static Permissible getPermissions(Entity faction, UUID member) { // TODO cleanup
 		if (faction == null || member == null) {

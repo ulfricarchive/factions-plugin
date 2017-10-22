@@ -1,5 +1,6 @@
 package com.ulfric.plugin.factions.command;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.Future;
@@ -12,10 +13,9 @@ import com.ulfric.plugin.factions.denizens.membership.MembershipComponent;
 import com.ulfric.plugin.factions.factions.members.MembersComponent;
 import com.ulfric.plugin.factions.factions.members.Membership;
 
-@Name("kick")
+@Name("leave")
 @Asynchronous
-@FactionsPermission("kick")
-public class FactionsKickCommand extends DenizenFactionTargetFactionsCommand {
+public class FactionsLeaveCommand extends DenizenFactionFactionsCommand {
 
 	private Membership membership;
 
@@ -24,49 +24,51 @@ public class FactionsKickCommand extends DenizenFactionTargetFactionsCommand {
 		MembersComponent membersComponent = faction.getComponent(MembersComponent.KEY);
 
 		if (membersComponent == null) {
-			tell("factions-kick-no-members");
+			tell("factions-leave-no-members");
 			return null;
 		}
 
 		Map<UUID, Membership> memberships = membersComponent.getMembers();
 		if (memberships == null) {
-			tell("factions-kick-no-members");
+			tell("factions-leave-no-members");
 			return null;
 		}
 
-		membership = memberships.get(targetUniqueId);
+		if (memberships.size() == 1) {
+			tell("factions-leave-only-member");
+			return null;
+		}
+
+		List<UUID> leaders = MembersComponent.getLeaders(faction);
+		if (leaders.size() == 1 && leaders.contains(uniqueId())) {
+			tell("factions-only-leader");
+			return null;
+		}
+
+		membership = memberships.remove(uniqueId());
 		if (membership == null) {
-			tell("factions-kick-member-not-found");
+			tell("factions-leave-member-not-found");
 			return null;
 		}
 
-		int senderWorth = MembersComponent.getPermissions(faction, uniqueId()).getWorth();
-		int targetWorth = MembersComponent.getPermissions(faction, targetUniqueId).getWorth();
-
-		if (targetWorth > senderWorth) {
-			tell("factions-kick-higher-rank");
-			Factions.tellDenizen(target, "factions-kick-attempt"); // TODO put this in their inbox
-			return null;
-		}
-
-		memberships.remove(targetUniqueId);
+		membersComponent.setMembers(memberships);
 
 		return saveFaction().whenComplete((response, error) -> {
 			if (error != null || !ResponseHelper.changedData(response)) {
-				internalError("factions-kick-save-error", error);
+				internalError("factions-leave-save-error", error);
 				return;
 			}
 
-			tellFaction("factions-kicked");
+			tellFaction("factions-leave");
 
-			MembershipComponent membershipComponent = target.removeComponent(MembershipComponent.KEY);
+			MembershipComponent membershipComponent = denizen.removeComponent(MembershipComponent.KEY);
 			if (membershipComponent == null) {
 				return;
 			}
 
-			Factions.saveDenizen(target).whenComplete((membershipResponse, membershipError) -> {
+			Factions.saveDenizen(denizen).whenComplete((membershipResponse, membershipError) -> {
 				// TODO error handling?
-				Factions.tellDenizen(target, "factions-kicked-from", details());
+				tell("factions-left");
 			});
 		});
 	}
