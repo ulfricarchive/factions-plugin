@@ -22,6 +22,7 @@ import com.ulfric.plugin.factions.factions.roles.AggregatePermissible;
 import com.ulfric.plugin.factions.factions.roles.EmptyPermissible;
 import com.ulfric.plugin.factions.factions.roles.Permissible;
 import com.ulfric.plugin.factions.factions.roles.RolesComponent;
+import com.ulfric.plugin.factions.factions.roles.StandardRoles;
 
 public class MembersComponent extends Component {
 	
@@ -39,7 +40,7 @@ public class MembersComponent extends Component {
 
 		Map<Integer, List<UUID>> rankToMembers = new HashMap<>();
 		members.members.keySet().forEach(member ->
-			rankToMembers.computeIfAbsent(getPermissions(faction, member).getWorth(),
+			rankToMembers.computeIfAbsent(getPermissionsForMemberInFaction(faction, member).getWorth(),
 					ignore -> new ArrayList<>()).add(member));
 
 		int highestRank = rankToMembers.keySet().stream().mapToInt(Integer::intValue).max().orElse(0);
@@ -47,18 +48,13 @@ public class MembersComponent extends Component {
 		return highest == null ? Collections.emptyList() : highest;
 	}
 
-	public static Permissible getPermissions(Entity faction, UUID member) { // TODO cleanup
+	public static Permissible getPermissionsForMemberInFaction(Entity faction, UUID member) { // TODO cleanup
 		if (faction == null || member == null) {
 			return EmptyPermissible.INSTANCE;
 		}
 
 		MembersComponent members = faction.getComponent(MembersComponent.KEY);
 		if (members == null) {
-			return EmptyPermissible.INSTANCE;
-		}
-
-		RolesComponent roles = faction.getComponent(RolesComponent.KEY);
-		if (roles == null) {
 			return EmptyPermissible.INSTANCE;
 		}
 
@@ -72,11 +68,24 @@ public class MembersComponent extends Component {
 			return EmptyPermissible.INSTANCE;
 		}
 
-		List<Permissible> permissions = memberRoles.stream()
+		List<Permissible> permissions;
+		RolesComponent roles = faction.getComponent(RolesComponent.KEY);
+		if (roles == null) {
+			permissions = memberRoles.stream()
+				.map(StandardRoles::getByName)
 				.filter(Objects::nonNull)
-				.map(roles::getPermissibleByName)
 				.collect(Collectors.toList());
+		} else {
+			permissions = memberRoles.stream()
+					.filter(Objects::nonNull)
+					.map(roles::getPermissibleByName)
+					.collect(Collectors.toList());
+		}
 
+		return aggregate(permissions);
+	}
+
+	private static Permissible aggregate(List<Permissible> permissions) {
 		if (permissions.isEmpty()) {
 			return EmptyPermissible.INSTANCE;
 		}

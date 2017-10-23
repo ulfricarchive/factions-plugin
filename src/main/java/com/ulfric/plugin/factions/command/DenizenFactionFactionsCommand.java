@@ -60,7 +60,7 @@ public abstract class DenizenFactionFactionsCommand extends DenizenFactionsComma
 
 	protected final boolean hasFactionPermission(String permission) {
 		permission = permission.toLowerCase();
-		return MembersComponent.getPermissions(denizen, uniqueId()).hasPermission(permission);
+		return MembersComponent.getPermissionsForMemberInFaction(faction, uniqueId()).hasPermission(permission);
 	}
 
 	protected final void tellFaction(String message) {

@@ -15,7 +15,6 @@ import com.ulfric.commons.naming.Name;
 import com.ulfric.commons.text.RegexHelper;
 import com.ulfric.commons.time.TemporalHelper;
 import com.ulfric.dragoon.rethink.response.ResponseHelper;
-import com.ulfric.i18n.content.Details;
 import com.ulfric.plugin.commands.Alias;
 import com.ulfric.plugin.commands.argument.Argument;
 import com.ulfric.plugin.entities.Entity;
@@ -76,11 +75,8 @@ public class FactionsCreateCommand extends DenizenFactionsCommand { // TODO clea
 
 			this.faction = faction;
 
-			Details details = details();
-			details.add("faction", faction);
-
 			if (faction.hasComponent(MembersComponent.KEY)) {
-				tell("factions-create-already-exists", details);
+				tell("factions-create-already-exists");
 				return FutureHelper.empty();
 			}
 
@@ -101,7 +97,7 @@ public class FactionsCreateCommand extends DenizenFactionsCommand { // TODO clea
 							throw new FactionSaveException("Failed to save denizen", response);
 						}
 					})
-					.thenRun(() -> tell("factions-create", details));
+					.thenRun(() -> tell("factions-create"));
 		});
 	}
 

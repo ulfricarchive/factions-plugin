@@ -42,8 +42,8 @@ public class FactionsKickCommand extends DenizenFactionTargetFactionsCommand {
 			return null;
 		}
 
-		int senderWorth = MembersComponent.getPermissions(faction, uniqueId()).getWorth();
-		int targetWorth = MembersComponent.getPermissions(faction, targetUniqueId).getWorth();
+		int senderWorth = MembersComponent.getPermissionsForMemberInFaction(faction, uniqueId()).getWorth();
+		int targetWorth = MembersComponent.getPermissionsForMemberInFaction(faction, targetUniqueId).getWorth();
 
 		if (targetWorth > senderWorth) {
 			tell("factions-kick-higher-rank");

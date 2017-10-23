@@ -7,6 +7,7 @@ import java.util.concurrent.CompletableFuture;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import com.ulfric.commons.concurrent.FutureHelper;
 import com.ulfric.dragoon.extension.inject.Inject;
 import com.ulfric.dragoon.rethink.DocumentHelper;
 import com.ulfric.dragoon.rethink.Instance;
@@ -14,6 +15,7 @@ import com.ulfric.dragoon.rethink.response.Response;
 import com.ulfric.dragoon.rethink.response.ResponseHelper;
 import com.ulfric.i18n.content.Details;
 import com.ulfric.plugin.entities.Entity;
+import com.ulfric.plugin.factions.command.exception.FactionSaveException;
 import com.ulfric.plugin.factions.denizens.DenizenSystem;
 import com.ulfric.plugin.factions.denizens.membership.MembershipComponent;
 import com.ulfric.plugin.factions.factions.FactionSystem;
@@ -45,20 +47,24 @@ public class Factions implements Service<Factions> {
 
 	public static CompletableFuture<Response> disbandFaction(Entity faction) {
 		Factions factions = get();
-		return factions.deleteFaction(faction).whenComplete((delete, error) -> {
-			if (error != null || !ResponseHelper.changedData(delete)) {
-				return;
+		return factions.deleteFaction(faction)
+		.thenAccept(delete -> {
+			if (!ResponseHelper.changedData(delete)) {
+				throw new FactionSaveException("Failed to delete faction", delete);
 			}
-
+		}).thenCompose(ignore -> {
+			CompletableFuture<Response> future = FutureHelper.empty();
 			// TODO may want to do this in parallel
 			MembersComponent members = faction.getComponent(MembersComponent.KEY);
 			if (members != null) {
-				members.getMemberEntities(factions).forEach(denizen -> {
+				for (Entity denizen : members.getMemberEntities(factions)) {
 					if (denizen.removeComponent(MembershipComponent.KEY) != null) {
-						factions.persistDenizen(denizen).join(); // TODO error handling
+						future = future.thenCompose(ignore2 -> factions.persistDenizen(denizen));
 					}
-				});
+				}
 			}
+
+			return future;
 		});
 	}
 
