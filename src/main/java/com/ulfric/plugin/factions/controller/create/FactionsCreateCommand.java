@@ -26,6 +26,8 @@ public class FactionsCreateCommand extends FactionsCommand {
 	@Argument(optional = true)
 	private String name;
 
+	private Faction faction;
+
 	@Override
 	public void runFactionsCommand() {
 		if (senderIsAlreadyInFaction()) {
@@ -56,7 +58,7 @@ public class FactionsCreateCommand extends FactionsCommand {
 	}
 
 	private void createFaction() {
-		Faction faction = factions.getFaction(name);
+		faction = factions.getFaction(name);
 
 		if (BooleanUtils.isTrue(faction.getPermanent())) {
 			tell("factions-create-name-taken-permanent");
