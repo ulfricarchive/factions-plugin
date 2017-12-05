@@ -1,9 +1,7 @@
-package com.ulfric.plugin.factions.controller.role;
+package com.ulfric.plugin.factions.controller;
 
 import com.ulfric.commons.naming.Name;
 import com.ulfric.plugin.commands.Alias;
-import com.ulfric.plugin.factions.controller.FactionFactionsCommand;
-import com.ulfric.plugin.factions.controller.FactionPermission;
 
 @Name("roles")
 @Alias("groups")
