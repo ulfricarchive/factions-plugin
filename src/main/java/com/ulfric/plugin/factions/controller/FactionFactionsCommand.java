@@ -16,20 +16,7 @@ import com.ulfric.plugin.factions.entity.Faction;
 public abstract class FactionFactionsCommand extends FactionsCommand {
 
 	protected Faction faction;
-
-	@Override
-	public final void runFactionsCommand() {
-		String factionName = factions.getDenizen(player()).getFaction();
-		if (factionName == null) {
-			tell("factions-must-be-in-faction");
-			return;
-		}
-
-		faction = factions.getFaction(factionName);
-		runCommandWithFaction();
-	}
-
-	public abstract void runCommandWithFaction();
+	protected Set<String> permissions;
 
 	protected Set<UUID> getDenizenUniqueIds() {
 		Map<UUID, Set<String>> members = faction.getMembersToRoles();

@@ -14,7 +14,7 @@ import com.ulfric.plugin.factions.controller.FactionPermission;
 public class FactionsDisbandCommand extends FactionFactionsCommand {
 
 	@Override
-	public void runCommandWithFaction() {
+	public void run() {
 		tellDenizensExceptForSender("factions-disbanded-by");
 		tell("factions-disbanded");
 

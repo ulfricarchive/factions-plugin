@@ -11,7 +11,7 @@ import com.ulfric.plugin.factions.controller.FactionPermission;
 public class FactionsRolesCommand extends FactionFactionsCommand {
 
 	@Override
-	public void runCommandWithFaction() {
+	public void run() {
 		tell("factions-role-list");
 	}
 

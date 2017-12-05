@@ -31,7 +31,7 @@
 
 		<dependency>
 			<groupId>com.ulfric.plugin</groupId>
-			<artifactId>entities-plugin</artifactId>
+			<artifactId>broken-plugin</artifactId>
 			<version>1.0.0</version>
 			<scope>provided</scope>
 		</dependency>

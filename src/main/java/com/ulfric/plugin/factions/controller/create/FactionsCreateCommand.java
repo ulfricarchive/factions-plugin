@@ -29,7 +29,7 @@ public class FactionsCreateCommand extends FactionsCommand {
 	private Faction faction;
 
 	@Override
-	public void runFactionsCommand() {
+	public void run() {
 		if (senderIsAlreadyInFaction()) {
 			tell("factions-create-already-in-faction");
 			return;
