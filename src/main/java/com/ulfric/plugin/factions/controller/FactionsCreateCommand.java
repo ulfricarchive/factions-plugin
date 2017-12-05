@@ -1,4 +1,4 @@
-package com.ulfric.plugin.factions.controller.create;
+package com.ulfric.plugin.factions.controller;
 
 import java.time.Instant;
 import java.util.HashMap;
@@ -14,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.ulfric.commons.naming.Name;
 import com.ulfric.plugin.commands.Alias;
 import com.ulfric.plugin.commands.argument.Argument;
-import com.ulfric.plugin.factions.controller.FactionsCommand;
 import com.ulfric.plugin.factions.entity.Denizen;
 import com.ulfric.plugin.factions.entity.Faction;
 import com.ulfric.plugin.factions.entity.role.StandardRoles;

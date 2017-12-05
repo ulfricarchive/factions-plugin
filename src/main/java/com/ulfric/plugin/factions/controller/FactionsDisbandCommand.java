@@ -1,12 +1,10 @@
-package com.ulfric.plugin.factions.controller.disband;
+package com.ulfric.plugin.factions.controller;
 
 import java.util.concurrent.TimeUnit;
 
 import com.ulfric.commons.naming.Name;
 import com.ulfric.commons.value.BeanHelper;
 import com.ulfric.plugin.commands.confirmation.RequireConfirmation;
-import com.ulfric.plugin.factions.controller.FactionFactionsCommand;
-import com.ulfric.plugin.factions.controller.FactionPermission;
 
 @Name("disband")
 @FactionPermission("disband")
