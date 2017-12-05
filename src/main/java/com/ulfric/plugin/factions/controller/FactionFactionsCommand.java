@@ -42,9 +42,9 @@ public abstract class FactionFactionsCommand extends FactionsCommand {
 	}
 
 	protected void tellDenizensExceptForSender(String message) {
-		Player player = player();
+		UUID player = uniqueId();
 		getOnlineDenizens()
-			.filter(player::equals)
+			.filter(denizen -> !denizen.getUniqueId().equals(player))
 			.forEach(denizen -> tell(denizen, message));
 	}
 
