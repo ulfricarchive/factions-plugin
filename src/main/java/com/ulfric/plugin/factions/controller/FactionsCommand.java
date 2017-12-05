@@ -26,7 +26,7 @@ public class FactionsCommand extends CommandHelp {
 	private static final Map<Class<?>, List<String>> REQUIRED_PERMISSIONS = new IdentityHashMap<>();
 
 	protected final Factions factions = Factions.get();
-	private List<String> missingPermissions;
+	private Set<String> missingPermissions; // TODO refactor to use stages
 
 	@Override
 	public final void run() {
@@ -37,7 +37,7 @@ public class FactionsCommand extends CommandHelp {
 
 			missingPermissions = permissions.stream()
 				.filter(permission -> !user.contains(permission))
-				.collect(Collectors.toList());
+				.collect(Collectors.toSet());
 
 			if (!missingPermissions.isEmpty()) {
 				if (missingPermissions.size() == 1) {

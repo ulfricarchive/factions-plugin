@@ -10,9 +10,14 @@ import com.ulfric.commons.collection.Collectors2;
 
 public enum StandardRoles implements Permissible {
 
-	LEADER;
+	LEADER("disband", "role-list");
 
 	private static final Map<String, StandardRoles> NAME_TO_ROLE = new HashMap<>();
+
+	static {
+		Arrays.stream(values())
+			.forEach(value -> NAME_TO_ROLE.put(value.getName(), value));
+	}
 
 	public static Map<String, StandardRoles> getAsMap() {
 		return Collections.unmodifiableMap(NAME_TO_ROLE);
