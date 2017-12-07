@@ -1,4 +1,4 @@
-package com.ulfric.plugin.factions.controller;
+package com.ulfric.plugin.factions.command;
 
 import java.util.List;
 

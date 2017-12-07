@@ -1,12 +1,11 @@
 package com.ulfric.plugin.factions.function;
 
-import com.ulfric.i18n.function.Function;
 import com.ulfric.plugin.factions.entity.Faction;
 
-public class FactionNameFunction extends Function<Faction> {
+public class FactionNameFunction extends FactionFunction {
 
 	public FactionNameFunction() {
-		super("name", Faction.class);
+		super("name");
 	}
 
 	@Override

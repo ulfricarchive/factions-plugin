@@ -1,4 +1,4 @@
-package com.ulfric.plugin.factions.controller;
+package com.ulfric.plugin.factions.command;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.TYPE;

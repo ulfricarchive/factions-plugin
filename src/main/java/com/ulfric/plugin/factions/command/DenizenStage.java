@@ -1,4 +1,4 @@
-package com.ulfric.plugin.factions.controller;
+package com.ulfric.plugin.factions.command;
 
 import org.bukkit.event.EventHandler;
 
