@@ -6,6 +6,8 @@ import com.ulfric.plugin.factions.command.FactionsCommand;
 import com.ulfric.plugin.factions.command.FactionsCreateCommand;
 import com.ulfric.plugin.factions.command.FactionsDescriptionCommand;
 import com.ulfric.plugin.factions.command.FactionsDisbandCommand;
+import com.ulfric.plugin.factions.command.FactionsRoleCommand;
+import com.ulfric.plugin.factions.command.FactionsRolesCommand;
 import com.ulfric.plugin.factions.function.FactionDescriptionFunction;
 import com.ulfric.plugin.factions.function.FactionNameFunction;
 import com.ulfric.plugin.factions.function.FactionRolesFunction;
@@ -29,6 +31,8 @@ public class FactionsPlugin extends Plugin {
 		install(FactionsCreateCommand.class);
 		install(FactionsDisbandCommand.class);
 		install(FactionsDescriptionCommand.class);
+		install(FactionsRoleCommand.class);
+		install(FactionsRolesCommand.class);
 	}
 
 }
