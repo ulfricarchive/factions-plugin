@@ -3,6 +3,7 @@ package com.ulfric.plugin.factions.command;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.ulfric.commons.naming.Name;
@@ -19,7 +20,7 @@ public class FactionsDescriptionCommand extends FactionFactionsCommand {
 	public void run() {
 		setupDescription();
 
-		if (description == null) {
+		if (StringUtils.isEmpty(description)) {
 			tell("factions-description-required");
 			return;
 		}
@@ -48,7 +49,7 @@ public class FactionsDescriptionCommand extends FactionFactionsCommand {
 				.get(FactionsDescriptionCommand.class)
 				.getArguments();
 
-		if (arguments == null) {
+		if (CollectionUtils.isEmpty(arguments)) {
 			return;
 		}
 
