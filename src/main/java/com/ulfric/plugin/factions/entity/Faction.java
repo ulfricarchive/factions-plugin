@@ -1,10 +1,12 @@
 package com.ulfric.plugin.factions.entity;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import com.ulfric.plugin.factions.entity.invitation.Invitation;
 import com.ulfric.plugin.factions.entity.role.Role;
 
 public class Faction extends Entity {
@@ -15,6 +17,7 @@ public class Faction extends Entity {
 	private Map<String, Role> roles;
 	private Boolean permanent;
 	private Boolean open;
+	private List<Invitation> invitations;
 
 	public String getDescription() {
 		return description;
@@ -62,6 +65,14 @@ public class Faction extends Entity {
 
 	public void setOpen(Boolean open) {
 		this.open = open;
+	}
+
+	public List<Invitation> getInvitations() {
+		return invitations;
+	}
+
+	public void setInvitations(List<Invitation> invitations) {
+		this.invitations = invitations;
 	}
 
 }

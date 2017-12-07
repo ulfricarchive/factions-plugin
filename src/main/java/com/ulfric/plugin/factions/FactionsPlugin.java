@@ -2,12 +2,15 @@ package com.ulfric.plugin.factions;
 
 import com.ulfric.plugin.Plugin;
 import com.ulfric.plugin.factions.command.ControllerStagesContainer;
+import com.ulfric.plugin.factions.command.DenizenResolver;
 import com.ulfric.plugin.factions.command.FactionsCommand;
 import com.ulfric.plugin.factions.command.FactionsCreateCommand;
 import com.ulfric.plugin.factions.command.FactionsDescriptionCommand;
 import com.ulfric.plugin.factions.command.FactionsDisbandCommand;
+import com.ulfric.plugin.factions.command.FactionsInviteCommand;
 import com.ulfric.plugin.factions.command.FactionsRoleCommand;
 import com.ulfric.plugin.factions.command.FactionsRolesCommand;
+import com.ulfric.plugin.factions.function.DenizenNameFunction;
 import com.ulfric.plugin.factions.function.FactionDescriptionFunction;
 import com.ulfric.plugin.factions.function.FactionNameFunction;
 import com.ulfric.plugin.factions.function.FactionRolesFunction;
@@ -24,6 +27,7 @@ public class FactionsPlugin extends Plugin {
 		install(FactionNameFunction.class);
 		install(FactionDescriptionFunction.class);
 		install(FactionRolesFunction.class);
+		install(DenizenNameFunction.class);
 		install(RoleNameFunction.class);
 		install(RolePermissionsFunction.class);
 
@@ -33,6 +37,9 @@ public class FactionsPlugin extends Plugin {
 		install(FactionsDescriptionCommand.class);
 		install(FactionsRoleCommand.class);
 		install(FactionsRolesCommand.class);
+		install(FactionsInviteCommand.class);
+
+		install(DenizenResolver.class);
 	}
 
 }

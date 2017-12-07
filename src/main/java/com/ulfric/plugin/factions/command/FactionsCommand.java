@@ -1,6 +1,10 @@
 package com.ulfric.plugin.factions.command;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 import com.ulfric.commons.naming.Name;
+import com.ulfric.commons.value.UniqueIdHelper;
 import com.ulfric.dragoon.extension.inject.Inject;
 import com.ulfric.plugin.commands.Alias;
 import com.ulfric.plugin.commands.CommandHelp;
@@ -15,5 +19,12 @@ public class FactionsCommand extends CommandHelp {
 	protected Factions factions;
 
 	protected Denizen denizen;
+
+	protected void tell(Denizen denizen, String message) {
+		Player player = Bukkit.getPlayer(UniqueIdHelper.parseUniqueIdExact(denizen.getIdentifier()));
+		if (player != null) {
+			tell(player, message);
+		}
+	}
 
 }
