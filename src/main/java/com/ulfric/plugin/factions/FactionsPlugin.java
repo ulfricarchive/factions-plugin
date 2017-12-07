@@ -8,12 +8,17 @@ import com.ulfric.plugin.factions.command.FactionsCreateCommand;
 import com.ulfric.plugin.factions.command.FactionsDescriptionCommand;
 import com.ulfric.plugin.factions.command.FactionsDisbandCommand;
 import com.ulfric.plugin.factions.command.FactionsInviteCommand;
+import com.ulfric.plugin.factions.command.FactionsInvitesCommand;
 import com.ulfric.plugin.factions.command.FactionsRoleCommand;
 import com.ulfric.plugin.factions.command.FactionsRolesCommand;
 import com.ulfric.plugin.factions.function.DenizenNameFunction;
 import com.ulfric.plugin.factions.function.FactionDescriptionFunction;
+import com.ulfric.plugin.factions.function.FactionInvitesFunction;
 import com.ulfric.plugin.factions.function.FactionNameFunction;
 import com.ulfric.plugin.factions.function.FactionRolesFunction;
+import com.ulfric.plugin.factions.function.InvitationCreationFunction;
+import com.ulfric.plugin.factions.function.InvitationInvitedFunction;
+import com.ulfric.plugin.factions.function.InvitationInviterFunction;
 import com.ulfric.plugin.factions.function.RoleNameFunction;
 import com.ulfric.plugin.factions.function.RolePermissionsFunction;
 
@@ -27,9 +32,13 @@ public class FactionsPlugin extends Plugin {
 		install(FactionNameFunction.class);
 		install(FactionDescriptionFunction.class);
 		install(FactionRolesFunction.class);
+		install(FactionInvitesFunction.class);
 		install(DenizenNameFunction.class);
 		install(RoleNameFunction.class);
 		install(RolePermissionsFunction.class);
+		install(InvitationCreationFunction.class);
+		install(InvitationInvitedFunction.class);
+		install(InvitationInviterFunction.class);
 
 		install(FactionsCommand.class);
 		install(FactionsCreateCommand.class);
@@ -38,6 +47,7 @@ public class FactionsPlugin extends Plugin {
 		install(FactionsRoleCommand.class);
 		install(FactionsRolesCommand.class);
 		install(FactionsInviteCommand.class);
+		install(FactionsInvitesCommand.class);
 
 		install(DenizenResolver.class);
 	}
