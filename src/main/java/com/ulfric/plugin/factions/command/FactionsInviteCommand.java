@@ -9,17 +9,12 @@ import java.util.UUID;
 import com.ulfric.commons.naming.Name;
 import com.ulfric.commons.value.UniqueIdHelper;
 import com.ulfric.plugin.commands.Alias;
-import com.ulfric.plugin.commands.argument.Argument;
-import com.ulfric.plugin.factions.entity.Denizen;
 import com.ulfric.plugin.factions.entity.invitation.Invitation;
 
 @Name("invite")
 @Alias("inv")
 @FactionPermission("invite")
-public class FactionsInviteCommand extends FactionFactionsCommand {
-
-	@Argument
-	Denizen target;
+public class FactionsInviteCommand extends TargetDenizenFactionFactionsCommand {
 
 	private Invitation invitation;
 
@@ -55,7 +50,7 @@ public class FactionsInviteCommand extends FactionFactionsCommand {
 
 		tellDenizensExceptForSender("factions-invite-by");
 		tell("factions-invite");
-		tell(target, "factions-invite-to");
+		tellTarget("factions-invite-to");
 	}
 
 }

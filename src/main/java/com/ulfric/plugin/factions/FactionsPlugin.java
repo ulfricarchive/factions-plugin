@@ -11,6 +11,7 @@ import com.ulfric.plugin.factions.command.FactionsInviteCommand;
 import com.ulfric.plugin.factions.command.FactionsInvitesCommand;
 import com.ulfric.plugin.factions.command.FactionsRoleCommand;
 import com.ulfric.plugin.factions.command.FactionsRolesCommand;
+import com.ulfric.plugin.factions.command.FactionsUninviteCommand;
 import com.ulfric.plugin.factions.function.DenizenNameFunction;
 import com.ulfric.plugin.factions.function.FactionDescriptionFunction;
 import com.ulfric.plugin.factions.function.FactionInvitesFunction;
@@ -46,6 +47,7 @@ public class FactionsPlugin extends Plugin {
 		install(FactionsDescriptionCommand.class);
 		install(FactionsRoleCommand.class);
 		install(FactionsRolesCommand.class);
+		install(FactionsUninviteCommand.class);
 		install(FactionsInviteCommand.class);
 		install(FactionsInvitesCommand.class);
 
