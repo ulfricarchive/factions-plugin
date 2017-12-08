@@ -3,6 +3,7 @@ package com.ulfric.plugin.factions;
 import com.ulfric.plugin.Plugin;
 import com.ulfric.plugin.factions.command.ControllerStagesContainer;
 import com.ulfric.plugin.factions.command.DenizenResolver;
+import com.ulfric.plugin.factions.command.FactionResolver;
 import com.ulfric.plugin.factions.command.FactionsCommand;
 import com.ulfric.plugin.factions.command.FactionsCreateCommand;
 import com.ulfric.plugin.factions.command.FactionsDescriptionCommand;
@@ -52,6 +53,7 @@ public class FactionsPlugin extends Plugin {
 		install(FactionsInvitesCommand.class);
 
 		install(DenizenResolver.class);
+		install(FactionResolver.class);
 	}
 
 }

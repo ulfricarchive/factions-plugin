@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import com.ulfric.dragoon.acrodb.Database;
 import com.ulfric.dragoon.acrodb.Store;
+import com.ulfric.dragoon.conf4j.Settings;
 import com.ulfric.dragoon.extension.inject.Inject;
 import com.ulfric.plugin.factions.entity.Denizen;
 import com.ulfric.plugin.factions.entity.Faction;
@@ -24,6 +25,9 @@ public class Factions implements Service<Factions> {
 	@Inject
 	@Database({ "factions", "factions" })
 	private Store<Faction> factions;
+
+	@Settings
+	private FactionsSettings settings;
 
 	@Override
 	public Class<Factions> getService() {
@@ -56,6 +60,10 @@ public class Factions implements Service<Factions> {
 
 	public void persistFaction(Faction faction) {
 		getFactions().persist(faction);
+	}
+
+	public FactionsSettings settings() {
+		return settings;
 	}
 
 }

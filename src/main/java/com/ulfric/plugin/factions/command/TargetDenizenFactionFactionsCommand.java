@@ -6,7 +6,7 @@ import com.ulfric.commons.value.UniqueIdHelper;
 import com.ulfric.plugin.commands.argument.Argument;
 import com.ulfric.plugin.factions.entity.Denizen;
 
-public class TargetDenizenFactionFactionsCommand extends FactionFactionsCommand {
+public abstract class TargetDenizenFactionFactionsCommand extends FactionFactionsCommand {
 
 	@Argument
 	protected Denizen target;

@@ -48,6 +48,9 @@ public class FactionsInviteCommand extends TargetDenizenFactionFactionsCommand {
 
 		invitations.add(invitation);
 
+		faction.setInvitations(invitations);
+		factions.persistFaction(faction);
+
 		tellDenizensExceptForSender("factions-invite-by");
 		tell("factions-invite");
 		tellTarget("factions-invite-to");
