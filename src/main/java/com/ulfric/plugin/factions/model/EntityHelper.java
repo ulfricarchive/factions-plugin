@@ -1,4 +1,4 @@
-package com.ulfric.plugin.factions.entity;
+package com.ulfric.plugin.factions.model;
 
 import java.util.Collections;
 import java.util.Map;
@@ -9,11 +9,22 @@ import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import com.ulfric.plugin.factions.Factions;
 
 public class EntityHelper {
+
+	public static Faction getFactionOf(OfflinePlayer player) {
+		Factions factions = Factions.get();
+		Denizen denizen = factions.getDenizen(player);
+		String faction = denizen.getFaction();
+		if (faction == null) {
+			return null;
+		}
+		return factions.getFaction(faction);
+	}
 
 	public static Faction getFactionOf(Denizen denizen) {
 		if (denizen == null) {

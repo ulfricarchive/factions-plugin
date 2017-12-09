@@ -1,7 +1,7 @@
 package com.ulfric.plugin.factions.function;
 
 import com.ulfric.i18n.function.Function;
-import com.ulfric.plugin.factions.entity.invitation.Invitation;
+import com.ulfric.plugin.factions.model.invitation.Invitation;
 
 public abstract class InvitationFunction extends Function<Invitation> {
 

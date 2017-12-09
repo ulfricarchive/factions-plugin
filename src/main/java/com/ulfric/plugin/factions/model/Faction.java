@@ -1,4 +1,4 @@
-package com.ulfric.plugin.factions.entity;
+package com.ulfric.plugin.factions.model;
 
 import java.time.Instant;
 import java.util.List;
@@ -6,8 +6,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-import com.ulfric.plugin.factions.entity.invitation.Invitation;
-import com.ulfric.plugin.factions.entity.role.Role;
+import com.ulfric.plugin.factions.model.dtr.DTR;
+import com.ulfric.plugin.factions.model.invitation.Invitation;
+import com.ulfric.plugin.factions.model.role.Role;
 
 public class Faction extends Entity {
 
@@ -18,6 +19,7 @@ public class Faction extends Entity {
 	private Boolean permanent;
 	private Boolean open;
 	private List<Invitation> invitations;
+	private DTR deathsTillRaidable;
 
 	public String getDescription() {
 		return description;
@@ -73,6 +75,14 @@ public class Faction extends Entity {
 
 	public void setInvitations(List<Invitation> invitations) {
 		this.invitations = invitations;
+	}
+
+	public DTR getDeathsTillRaidable() {
+		return deathsTillRaidable;
+	}
+
+	public void setDeathsTillRaidable(DTR deathsTillRaidable) {
+		this.deathsTillRaidable = deathsTillRaidable;
 	}
 
 }

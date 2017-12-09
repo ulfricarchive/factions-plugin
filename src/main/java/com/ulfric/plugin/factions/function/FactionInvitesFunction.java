@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.ulfric.plugin.factions.entity.Faction;
-import com.ulfric.plugin.factions.entity.invitation.Invitation;
+import com.ulfric.plugin.factions.model.Faction;
+import com.ulfric.plugin.factions.model.invitation.Invitation;
 
 public class FactionInvitesFunction extends FactionFunction {
 

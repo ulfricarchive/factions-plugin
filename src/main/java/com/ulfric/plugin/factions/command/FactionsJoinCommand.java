@@ -13,10 +13,10 @@ import org.apache.commons.lang3.BooleanUtils;
 import com.ulfric.commons.collection.MapHelper;
 import com.ulfric.commons.naming.Name;
 import com.ulfric.plugin.commands.Alias;
-import com.ulfric.plugin.factions.entity.EntityHelper;
-import com.ulfric.plugin.factions.entity.Faction;
-import com.ulfric.plugin.factions.entity.invitation.Invitation;
-import com.ulfric.plugin.factions.entity.role.StandardRoles;
+import com.ulfric.plugin.factions.model.EntityHelper;
+import com.ulfric.plugin.factions.model.Faction;
+import com.ulfric.plugin.factions.model.invitation.Invitation;
+import com.ulfric.plugin.factions.model.role.StandardRoles;
 
 @Name("join")
 @Alias("j")

@@ -9,7 +9,7 @@ import com.ulfric.dragoon.stereotype.Stereotypes;
 import com.ulfric.plugin.commands.Command;
 import com.ulfric.plugin.commands.CommandPreRunEvent;
 import com.ulfric.plugin.commands.stage.Stage;
-import com.ulfric.plugin.factions.entity.role.PermissibleHelper;
+import com.ulfric.plugin.factions.model.role.PermissibleHelper;
 
 public class FactionPermissionsStage extends Stage<List<String>> {
 

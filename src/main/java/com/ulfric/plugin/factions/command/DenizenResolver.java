@@ -9,7 +9,7 @@ import com.ulfric.dragoon.extension.inject.Inject;
 import com.ulfric.plugin.commands.argument.ResolutionRequest;
 import com.ulfric.plugin.commands.argument.Resolver;
 import com.ulfric.plugin.factions.Factions;
-import com.ulfric.plugin.factions.entity.Denizen;
+import com.ulfric.plugin.factions.model.Denizen;
 
 public class DenizenResolver extends Resolver<Denizen> {
 

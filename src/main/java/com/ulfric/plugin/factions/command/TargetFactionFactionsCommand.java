@@ -1,8 +1,8 @@
 package com.ulfric.plugin.factions.command;
 
 import com.ulfric.plugin.commands.argument.Argument;
-import com.ulfric.plugin.factions.entity.EntityHelper;
-import com.ulfric.plugin.factions.entity.Faction;
+import com.ulfric.plugin.factions.model.EntityHelper;
+import com.ulfric.plugin.factions.model.Faction;
 
 public abstract class TargetFactionFactionsCommand extends FactionsCommand {
 

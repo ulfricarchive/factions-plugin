@@ -9,7 +9,7 @@ import com.ulfric.dragoon.extension.inject.Inject;
 import com.ulfric.plugin.commands.Alias;
 import com.ulfric.plugin.commands.CommandHelp;
 import com.ulfric.plugin.factions.Factions;
-import com.ulfric.plugin.factions.entity.Denizen;
+import com.ulfric.plugin.factions.model.Denizen;
 
 @Name("factions")
 @Alias({ "faction", "facs", "fac", "f", "team", "guild", "gang", "group" })

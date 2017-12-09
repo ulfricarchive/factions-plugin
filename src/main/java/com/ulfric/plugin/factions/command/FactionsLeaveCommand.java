@@ -7,7 +7,7 @@ import java.util.UUID;
 import org.apache.commons.collections4.MapUtils;
 
 import com.ulfric.commons.naming.Name;
-import com.ulfric.plugin.factions.entity.role.StandardRoles;
+import com.ulfric.plugin.factions.model.role.StandardRoles;
 
 @Name("leave")
 public class FactionsLeaveCommand extends FactionFactionsCommand {

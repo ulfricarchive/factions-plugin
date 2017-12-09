@@ -4,8 +4,8 @@ import java.util.Map;
 
 import org.apache.commons.collections4.MapUtils;
 
-import com.ulfric.plugin.factions.entity.Faction;
-import com.ulfric.plugin.factions.entity.role.Role;
+import com.ulfric.plugin.factions.model.Faction;
+import com.ulfric.plugin.factions.model.role.Role;
 
 public class FactionRolesFunction extends FactionFunction {
 

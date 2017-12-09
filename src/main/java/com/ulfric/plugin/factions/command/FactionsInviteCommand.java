@@ -9,7 +9,7 @@ import java.util.UUID;
 import com.ulfric.commons.naming.Name;
 import com.ulfric.commons.value.UniqueIdHelper;
 import com.ulfric.plugin.commands.Alias;
-import com.ulfric.plugin.factions.entity.invitation.Invitation;
+import com.ulfric.plugin.factions.model.invitation.Invitation;
 
 @Name("invite")
 @Alias("inv")

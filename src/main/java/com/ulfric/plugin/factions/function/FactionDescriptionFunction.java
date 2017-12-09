@@ -1,6 +1,6 @@
 package com.ulfric.plugin.factions.function;
 
-import com.ulfric.plugin.factions.entity.Faction;
+import com.ulfric.plugin.factions.model.Faction;
 
 public class FactionDescriptionFunction extends FactionFunction {
 

@@ -5,7 +5,7 @@ import org.bukkit.event.EventHandler;
 import com.ulfric.plugin.commands.Command;
 import com.ulfric.plugin.commands.CommandPreRunEvent;
 import com.ulfric.plugin.commands.stage.VoidStage;
-import com.ulfric.plugin.factions.entity.EntityHelper;
+import com.ulfric.plugin.factions.model.EntityHelper;
 
 public class FactionStage extends VoidStage {
 

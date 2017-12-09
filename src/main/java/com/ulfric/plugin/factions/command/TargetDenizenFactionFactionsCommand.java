@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import com.ulfric.commons.value.UniqueIdHelper;
 import com.ulfric.plugin.commands.argument.Argument;
-import com.ulfric.plugin.factions.entity.Denizen;
+import com.ulfric.plugin.factions.model.Denizen;
 
 public abstract class TargetDenizenFactionFactionsCommand extends FactionFactionsCommand {
 

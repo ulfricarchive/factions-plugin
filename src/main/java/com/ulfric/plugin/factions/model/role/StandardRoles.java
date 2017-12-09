@@ -1,4 +1,4 @@
-package com.ulfric.plugin.factions.entity.role;
+package com.ulfric.plugin.factions.model.role;
 
 import java.util.Arrays;
 import java.util.Collections;

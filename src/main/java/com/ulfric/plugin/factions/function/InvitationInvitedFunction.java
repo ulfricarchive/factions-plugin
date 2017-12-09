@@ -1,7 +1,7 @@
 package com.ulfric.plugin.factions.function;
 
 import com.ulfric.commons.bukkit.player.PlayerHelper;
-import com.ulfric.plugin.factions.entity.invitation.Invitation;
+import com.ulfric.plugin.factions.model.invitation.Invitation;
 
 public class InvitationInvitedFunction extends InvitationFunction {
 

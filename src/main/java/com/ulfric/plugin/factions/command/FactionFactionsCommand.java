@@ -6,9 +6,9 @@ import java.util.stream.Stream;
 
 import org.bukkit.entity.Player;
 
-import com.ulfric.plugin.factions.entity.Denizen;
-import com.ulfric.plugin.factions.entity.EntityHelper;
-import com.ulfric.plugin.factions.entity.Faction;
+import com.ulfric.plugin.factions.model.Denizen;
+import com.ulfric.plugin.factions.model.EntityHelper;
+import com.ulfric.plugin.factions.model.Faction;
 
 public abstract class FactionFactionsCommand extends FactionsCommand {
 

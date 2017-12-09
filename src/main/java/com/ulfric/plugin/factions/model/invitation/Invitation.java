@@ -1,4 +1,4 @@
-package com.ulfric.plugin.factions.entity.invitation;
+package com.ulfric.plugin.factions.model.invitation;
 
 import java.time.Instant;
 import java.util.UUID;

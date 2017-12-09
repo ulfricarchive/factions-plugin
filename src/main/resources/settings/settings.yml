@@ -1,1 +1,5 @@
 max-players-per-faction: 5
+dtr-regen-base-amount: 0.01
+dtr-regen-per-player-amount: 0.08
+dtr-regen-frequency: "PT1M"
+dtr-regen-freeze: "PT1H"

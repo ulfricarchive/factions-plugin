@@ -14,9 +14,9 @@ import org.apache.commons.lang3.StringUtils;
 import com.ulfric.commons.naming.Name;
 import com.ulfric.plugin.commands.Alias;
 import com.ulfric.plugin.commands.argument.Argument;
-import com.ulfric.plugin.factions.entity.Denizen;
-import com.ulfric.plugin.factions.entity.Faction;
-import com.ulfric.plugin.factions.entity.role.StandardRoles;
+import com.ulfric.plugin.factions.model.Denizen;
+import com.ulfric.plugin.factions.model.Faction;
+import com.ulfric.plugin.factions.model.role.StandardRoles;
 
 @Name("create")
 @Alias("new")

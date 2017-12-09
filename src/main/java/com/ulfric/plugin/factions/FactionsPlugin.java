@@ -4,6 +4,7 @@ import com.ulfric.plugin.Plugin;
 import com.ulfric.plugin.factions.command.ControllerStagesContainer;
 import com.ulfric.plugin.factions.command.DenizenResolver;
 import com.ulfric.plugin.factions.command.FactionResolver;
+import com.ulfric.plugin.factions.command.FactionsCloseCommand;
 import com.ulfric.plugin.factions.command.FactionsCommand;
 import com.ulfric.plugin.factions.command.FactionsCreateCommand;
 import com.ulfric.plugin.factions.command.FactionsDescriptionCommand;
@@ -12,9 +13,11 @@ import com.ulfric.plugin.factions.command.FactionsInviteCommand;
 import com.ulfric.plugin.factions.command.FactionsInvitesCommand;
 import com.ulfric.plugin.factions.command.FactionsJoinCommand;
 import com.ulfric.plugin.factions.command.FactionsLeaveCommand;
+import com.ulfric.plugin.factions.command.FactionsOpenCommand;
 import com.ulfric.plugin.factions.command.FactionsRoleCommand;
 import com.ulfric.plugin.factions.command.FactionsRolesCommand;
 import com.ulfric.plugin.factions.command.FactionsUninviteCommand;
+import com.ulfric.plugin.factions.dtr.DtrRegenTask;
 import com.ulfric.plugin.factions.function.DenizenNameFunction;
 import com.ulfric.plugin.factions.function.FactionDescriptionFunction;
 import com.ulfric.plugin.factions.function.FactionInvitesFunction;
@@ -55,9 +58,13 @@ public class FactionsPlugin extends Plugin {
 		install(FactionsInvitesCommand.class);
 		install(FactionsJoinCommand.class);
 		install(FactionsLeaveCommand.class);
+		install(FactionsOpenCommand.class);
+		install(FactionsCloseCommand.class);
 
 		install(DenizenResolver.class);
 		install(FactionResolver.class);
+
+		install(DtrRegenTask.class);
 	}
 
 }

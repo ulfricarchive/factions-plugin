@@ -1,15 +1,17 @@
 package com.ulfric.plugin.factions;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
-import org.bukkit.entity.Player;
+import org.bukkit.OfflinePlayer;
 
 import com.ulfric.dragoon.acrodb.Database;
 import com.ulfric.dragoon.acrodb.Store;
 import com.ulfric.dragoon.conf4j.Settings;
 import com.ulfric.dragoon.extension.inject.Inject;
-import com.ulfric.plugin.factions.entity.Denizen;
-import com.ulfric.plugin.factions.entity.Faction;
+import com.ulfric.plugin.factions.model.Denizen;
+import com.ulfric.plugin.factions.model.Faction;
+import com.ulfric.plugin.factions.settings.FactionsSettings;
 import com.ulfric.plugin.services.Service;
 
 public class Factions implements Service<Factions> {
@@ -42,7 +44,7 @@ public class Factions implements Service<Factions> {
 		return factions;
 	}
 
-	public Denizen getDenizen(Player player) {
+	public Denizen getDenizen(OfflinePlayer player) {
 		return getDenizen(player.getUniqueId());
 	}
 
@@ -56,6 +58,10 @@ public class Factions implements Service<Factions> {
 
 	public Faction getFaction(String name) {
 		return getFactions().get(name);
+	}
+
+	public Stream<Faction> getAllFactions() {
+		return getFactions().getAllDocuments();
 	}
 
 	public void persistFaction(Faction faction) {

@@ -1,7 +1,7 @@
 package com.ulfric.plugin.factions.function;
 
 import com.ulfric.i18n.function.Function;
-import com.ulfric.plugin.factions.entity.role.Role;
+import com.ulfric.plugin.factions.model.role.Role;
 
 public class RoleNameFunction extends Function<Role> {
 

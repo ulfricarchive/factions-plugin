@@ -1,4 +1,4 @@
-package com.ulfric.plugin.factions.entity.role;
+package com.ulfric.plugin.factions.model.role;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.ulfric.plugin.factions.Factions;
-import com.ulfric.plugin.factions.entity.Faction;
+import com.ulfric.plugin.factions.model.Faction;
 
 public class PermissibleHelper {
 

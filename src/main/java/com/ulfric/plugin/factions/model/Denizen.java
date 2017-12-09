@@ -1,4 +1,4 @@
-package com.ulfric.plugin.factions.entity;
+package com.ulfric.plugin.factions.model;
 
 public class Denizen extends Entity {
 

@@ -9,7 +9,7 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import com.ulfric.commons.naming.Name;
 import com.ulfric.plugin.commands.Alias;
-import com.ulfric.plugin.factions.entity.invitation.Invitation;
+import com.ulfric.plugin.factions.model.invitation.Invitation;
 
 @Name("uninvite")
 @Alias({ "uninv", "deinv", "deinvite" })
