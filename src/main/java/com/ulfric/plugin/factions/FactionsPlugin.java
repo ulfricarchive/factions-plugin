@@ -9,7 +9,6 @@ import com.ulfric.plugin.factions.command.FactionsCommand;
 import com.ulfric.plugin.factions.command.FactionsCreateCommand;
 import com.ulfric.plugin.factions.command.FactionsDescriptionCommand;
 import com.ulfric.plugin.factions.command.FactionsDisbandCommand;
-import com.ulfric.plugin.factions.command.FactionsDtrCommand;
 import com.ulfric.plugin.factions.command.FactionsInviteCommand;
 import com.ulfric.plugin.factions.command.FactionsInvitesCommand;
 import com.ulfric.plugin.factions.command.FactionsJoinCommand;
@@ -17,6 +16,8 @@ import com.ulfric.plugin.factions.command.FactionsLeaveCommand;
 import com.ulfric.plugin.factions.command.FactionsOpenCommand;
 import com.ulfric.plugin.factions.command.FactionsRoleCommand;
 import com.ulfric.plugin.factions.command.FactionsRolesCommand;
+import com.ulfric.plugin.factions.command.FactionsShowCommand;
+import com.ulfric.plugin.factions.command.FactionsShowCountCommand;
 import com.ulfric.plugin.factions.command.FactionsUninviteCommand;
 import com.ulfric.plugin.factions.dtr.DtrListener;
 import com.ulfric.plugin.factions.dtr.DtrRegenTask;
@@ -74,7 +75,8 @@ public class FactionsPlugin extends Plugin {
 		install(FactionsLeaveCommand.class);
 		install(FactionsOpenCommand.class);
 		install(FactionsCloseCommand.class);
-		install(FactionsDtrCommand.class);
+		install(FactionsShowCommand.class);
+		install(FactionsShowCountCommand.class);
 
 		install(DenizenResolver.class);
 		install(FactionResolver.class);

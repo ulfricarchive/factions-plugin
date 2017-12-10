@@ -20,6 +20,7 @@ public class Faction extends Entity {
 	private Boolean open;
 	private List<Invitation> invitations;
 	private DTR deathsTillRaidable;
+	private Integer showCount;
 
 	public String getDescription() {
 		return description;
@@ -83,6 +84,14 @@ public class Faction extends Entity {
 
 	public void setDeathsTillRaidable(DTR deathsTillRaidable) {
 		this.deathsTillRaidable = deathsTillRaidable;
+	}
+
+	public Integer getShowCount() {
+		return showCount;
+	}
+
+	public void setShowCount(Integer showCount) {
+		this.showCount = showCount;
 	}
 
 }
