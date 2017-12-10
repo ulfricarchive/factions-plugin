@@ -3,3 +3,10 @@ dtr-regen-base-amount: 0.01
 dtr-regen-per-player-amount: 0.08
 dtr-regen-frequency: "PT1M"
 dtr-regen-freeze: "PT1H"
+power-caps:
+  0: 0.01
+  1: 1.01
+  2: 2.25
+  3: 2.50
+  4: 2.75
+  5: 3.25
