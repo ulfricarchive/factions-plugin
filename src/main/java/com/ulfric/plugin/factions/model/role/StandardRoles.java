@@ -24,6 +24,10 @@ public enum StandardRoles implements Permissible {
 		return Collections.unmodifiableMap(NAME_TO_ROLE);
 	}
 
+	public static StandardRoles getByName(String name) {
+		return NAME_TO_ROLE.get(name);
+	}
+
 	private final Set<String> permissions;
 
 	StandardRoles(String... permissions) {

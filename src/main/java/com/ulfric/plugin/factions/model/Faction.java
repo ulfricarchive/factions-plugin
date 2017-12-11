@@ -9,6 +9,7 @@ import java.util.UUID;
 import com.ulfric.plugin.factions.model.dtr.DTR;
 import com.ulfric.plugin.factions.model.invitation.Invitation;
 import com.ulfric.plugin.factions.model.role.Role;
+import com.ulfric.plugin.factions.model.territory.Territory;
 
 public class Faction extends Entity {
 
@@ -21,6 +22,7 @@ public class Faction extends Entity {
 	private List<Invitation> invitations;
 	private DTR deathsTillRaidable;
 	private Integer showCount;
+	private Territory territory;
 
 	public String getDescription() {
 		return description;
@@ -92,6 +94,14 @@ public class Faction extends Entity {
 
 	public void setShowCount(Integer showCount) {
 		this.showCount = showCount;
+	}
+
+	public Territory getTerritory() {
+		return territory;
+	}
+
+	public void setTerritory(Territory territory) {
+		this.territory = territory;
 	}
 
 }
