@@ -29,6 +29,7 @@ import com.ulfric.plugin.factions.function.FactionDenizensFunction;
 import com.ulfric.plugin.factions.function.FactionDescriptionFunction;
 import com.ulfric.plugin.factions.function.FactionDtrFunction;
 import com.ulfric.plugin.factions.function.FactionDtrMetaFunction;
+import com.ulfric.plugin.factions.function.FactionHomeFunction;
 import com.ulfric.plugin.factions.function.FactionInvitesFunction;
 import com.ulfric.plugin.factions.function.FactionNameFunction;
 import com.ulfric.plugin.factions.function.FactionRaidableFunction;
@@ -65,6 +66,7 @@ public class FactionsPlugin extends Plugin {
 		install(InvitationInviterFunction.class);
 		install(FactionDenizensFunction.class);
 		install(DenizenTitleFunction.class);
+		install(FactionHomeFunction.class);
 
 		install(FactionsCommand.class);
 		install(FactionsCreateCommand.class);
