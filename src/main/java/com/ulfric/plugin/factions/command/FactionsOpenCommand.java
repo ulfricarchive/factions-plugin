@@ -19,7 +19,7 @@ public class FactionsOpenCommand extends FactionFactionsCommand {
 			return;
 		}
 
-		faction.setOpen(false);
+		faction.setOpen(true);
 		factions.persistFaction(faction);
 
 		tell("factions-open");
