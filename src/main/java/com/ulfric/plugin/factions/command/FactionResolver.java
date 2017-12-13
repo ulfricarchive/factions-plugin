@@ -3,6 +3,7 @@ package com.ulfric.plugin.factions.command;
 import java.util.UUID;
 
 import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -32,7 +33,7 @@ public class FactionResolver extends Resolver<Faction> {
 		Faction faction = factions.getFaction(argument);
 
 		if (MapUtils.isEmpty(faction.getMembersToRoles())) {
-			if (faction.getPermanent()) {
+			if (BooleanUtils.isTrue(faction.getPermanent())) {
 				return faction;
 			}
 		} else {
