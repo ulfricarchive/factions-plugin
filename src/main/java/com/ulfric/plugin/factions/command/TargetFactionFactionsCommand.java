@@ -6,7 +6,7 @@ import com.ulfric.plugin.factions.model.Faction;
 
 public abstract class TargetFactionFactionsCommand extends FactionsCommand {
 
-	@Argument
+	@Argument(message = "factions-target-required")
 	protected Faction target;
 
 	protected void tellTarget(String message) {

@@ -42,7 +42,7 @@ public class FactionsJoinCommand extends TargetFactionFactionsCommand {
 
 		resolveInvitation();
 		if (invite == null) {
-			if (BooleanUtils.isTrue(target.getOpen())) {
+			if (!BooleanUtils.isTrue(target.getOpen())) {
 				tell("factions-join-not-invited");
 				return;
 			}

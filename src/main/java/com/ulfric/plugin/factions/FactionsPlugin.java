@@ -68,6 +68,9 @@ public class FactionsPlugin extends Plugin {
 		install(DenizenTitleFunction.class);
 		install(FactionHomeFunction.class);
 
+		install(DenizenResolver.class);
+		install(FactionResolver.class);
+
 		install(FactionsCommand.class);
 		install(FactionsCreateCommand.class);
 		install(FactionsDisbandCommand.class);
@@ -83,9 +86,6 @@ public class FactionsPlugin extends Plugin {
 		install(FactionsCloseCommand.class);
 		install(FactionsShowCommand.class);
 		install(FactionsShowCountCommand.class);
-
-		install(DenizenResolver.class);
-		install(FactionResolver.class);
 
 		install(DtrListener.class);
 		install(DtrRegenTask.class);
