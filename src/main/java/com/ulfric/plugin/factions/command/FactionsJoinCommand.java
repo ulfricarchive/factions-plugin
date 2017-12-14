@@ -60,6 +60,9 @@ public class FactionsJoinCommand extends TargetFactionFactionsCommand {
 		Set<String> roles = new HashSet<>();
 		roles.add(StandardRoles.MEMBER.getName());
 		members.put(uniqueId(), roles);
+		target.setMembersToRoles(members);
+
+		denizen.setFaction(target.getIdentifier());
 
 		factions.persistFaction(target);
 		factions.persistDenizen(denizen);
