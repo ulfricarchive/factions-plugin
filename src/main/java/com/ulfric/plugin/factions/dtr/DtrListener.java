@@ -44,6 +44,7 @@ public class DtrListener implements Listener {
 					negative = BigDecimal.ZERO;
 				}
 			} else {
+				deathsTillRaidable = new DTR();
 				negative = BigDecimal.ZERO;
 			}
 
