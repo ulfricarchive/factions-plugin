@@ -112,7 +112,7 @@ public class FactionsCreateCommand extends FactionsCommand {
 	}
 
 	private boolean nameIsAboveRequiredLength() { // TODO configurable
-		return name.length() > 8;
+		return name.length() > 12;
 	}
 
 	private boolean isNameProhibited() { // TODO configurable
