@@ -19,10 +19,7 @@ public class FactionPermissionsStage extends Stage<List<String>> {
 		if (command instanceof FactionFactionsCommand) {
 			FactionFactionsCommand factionsCommand = (FactionFactionsCommand) command;
 
-			if (factionsCommand.permissions == null) {
-				factionsCommand.permissions = PermissibleHelper.getAllPermissions(factionsCommand.uniqueId(),
-						factionsCommand.factions);
-			}
+			setupPermissions(factionsCommand);
 
 			for (String permission : get(event.getCommandType())) {
 				if (!factionsCommand.permissions.contains(permission)) {
@@ -30,6 +27,12 @@ public class FactionPermissionsStage extends Stage<List<String>> {
 					return;
 				}
 			}
+		}
+	}
+
+	private void setupPermissions(FactionFactionsCommand command) {
+		if (command.permissions == null) {
+			command.permissions = PermissibleHelper.getAllPermissions(command.uniqueId(), command.factions);
 		}
 	}
 
