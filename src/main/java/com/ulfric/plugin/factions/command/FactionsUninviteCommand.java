@@ -13,7 +13,7 @@ import com.ulfric.plugin.factions.model.invitation.Invitation;
 
 @Name("uninvite")
 @Alias({ "uninv", "deinv", "deinvite" })
-@FactionPermission("invite")
+@FactionPermission("uninvite")
 public class FactionsUninviteCommand extends TargetDenizenFactionFactionsCommand {
 
 	protected Invitation invite;

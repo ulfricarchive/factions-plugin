@@ -10,7 +10,7 @@ import com.ulfric.commons.collection.Collectors2;
 
 public enum StandardRoles implements Permissible {
 
-	LEADER("disband", "role-list", "description-set", "invite", "open", "close"),
+	LEADER("disband", "role-list", "description-set", "invite", "uninvite", "invite-list", "open", "close"),
 	MEMBER();
 
 	private static final Map<String, StandardRoles> NAME_TO_ROLE = new HashMap<>();
