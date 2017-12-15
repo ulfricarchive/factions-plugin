@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import com.ulfric.plugin.factions.model.ban.Ban;
 import com.ulfric.plugin.factions.model.dtr.DTR;
 import com.ulfric.plugin.factions.model.invitation.Invitation;
 import com.ulfric.plugin.factions.model.role.Role;
@@ -20,6 +21,7 @@ public class Faction extends Entity {
 	private Boolean permanent;
 	private Boolean open;
 	private List<Invitation> invitations;
+	private List<Ban> bans;
 	private DTR deathsTillRaidable;
 	private Integer showCount;
 	private Territory territory;
@@ -78,6 +80,14 @@ public class Faction extends Entity {
 
 	public void setInvitations(List<Invitation> invitations) {
 		this.invitations = invitations;
+	}
+
+	public List<Ban> getBans() {
+		return bans;
+	}
+
+	public void setBans(List<Ban> bans) {
+		this.bans = bans;
 	}
 
 	public DTR getDeathsTillRaidable() {

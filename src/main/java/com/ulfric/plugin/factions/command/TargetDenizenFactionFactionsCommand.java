@@ -19,4 +19,18 @@ public abstract class TargetDenizenFactionFactionsCommand extends FactionFaction
 		tell(target, message);
 	}
 
+	protected boolean isSelfTarget() {
+		return target.getIdentifier().equals(denizen.getIdentifier());
+	}
+
+	protected boolean senderHasHigherRank() {
+		int senderLevel = permissionLevel();
+		int targetLevel = calculatePermissionLevel(target);
+		return senderLevel > targetLevel;
+	}
+
+	protected boolean isTargetInSameFaction() {
+		return faction.getIdentifier().equals(target.getFaction());
+	}
+
 }

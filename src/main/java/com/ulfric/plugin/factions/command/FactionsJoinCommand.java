@@ -15,6 +15,7 @@ import com.ulfric.commons.naming.Name;
 import com.ulfric.plugin.commands.Alias;
 import com.ulfric.plugin.factions.model.EntityHelper;
 import com.ulfric.plugin.factions.model.Faction;
+import com.ulfric.plugin.factions.model.ban.Ban;
 import com.ulfric.plugin.factions.model.invitation.Invitation;
 import com.ulfric.plugin.factions.model.role.StandardRoles;
 
@@ -37,6 +38,11 @@ public class FactionsJoinCommand extends TargetFactionFactionsCommand {
 		int currentMemberCount = MapHelper.size(members);
 		if (currentMemberCount >= factions.settings().maxPlayersPerFaction()) {
 			tell("factions-join-full");
+			return;
+		}
+
+		if (isBannedFromFaction() ) {
+			tell("factions-join-banned");
 			return;
 		}
 
@@ -82,6 +88,22 @@ public class FactionsJoinCommand extends TargetFactionFactionsCommand {
 				return;
 			}
 		}
+	}
+
+	private boolean isBannedFromFaction() {
+		List<Ban> bans = target.getBans();
+		if (CollectionUtils.isEmpty(bans)) {
+			return false;
+		}
+
+		UUID uniqueId = uniqueId();
+		for (Ban ban : bans) {
+			if (Objects.equals(ban.getTarget(), uniqueId)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 }

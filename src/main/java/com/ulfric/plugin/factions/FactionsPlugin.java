@@ -4,6 +4,7 @@ import com.ulfric.plugin.Plugin;
 import com.ulfric.plugin.factions.command.ControllerStagesContainer;
 import com.ulfric.plugin.factions.command.DenizenResolver;
 import com.ulfric.plugin.factions.command.FactionResolver;
+import com.ulfric.plugin.factions.command.FactionsBanCommand;
 import com.ulfric.plugin.factions.command.FactionsCloseCommand;
 import com.ulfric.plugin.factions.command.FactionsCommand;
 import com.ulfric.plugin.factions.command.FactionsCreateCommand;
@@ -88,6 +89,7 @@ public class FactionsPlugin extends Plugin {
 		install(FactionsShowCommand.class);
 		install(FactionsShowCountCommand.class);
 		install(FactionsKickCommand.class);
+		install(FactionsBanCommand.class);
 
 		install(DtrListener.class);
 		install(DtrRegenTask.class);

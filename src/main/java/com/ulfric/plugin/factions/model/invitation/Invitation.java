@@ -1,15 +1,13 @@
 package com.ulfric.plugin.factions.model.invitation;
 
-import java.time.Instant;
 import java.util.UUID;
 
-import com.ulfric.commons.value.Bean;
+import com.ulfric.plugin.factions.model.CreatedBean;
 
-public class Invitation extends Bean {
+public class Invitation extends CreatedBean {
 
 	private UUID invited;
 	private UUID inviter;
-	private Instant creation;
 
 	public UUID getInvited() {
 		return invited;
@@ -25,14 +23,6 @@ public class Invitation extends Bean {
 
 	public void setInviter(UUID inviter) {
 		this.inviter = inviter;
-	}
-
-	public Instant getCreation() {
-		return creation;
-	}
-
-	public void setCreation(Instant creation) {
-		this.creation = creation;
 	}
 
 }
