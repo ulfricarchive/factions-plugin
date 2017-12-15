@@ -12,6 +12,7 @@ import com.ulfric.plugin.factions.command.FactionsDisbandCommand;
 import com.ulfric.plugin.factions.command.FactionsInviteCommand;
 import com.ulfric.plugin.factions.command.FactionsInvitesCommand;
 import com.ulfric.plugin.factions.command.FactionsJoinCommand;
+import com.ulfric.plugin.factions.command.FactionsKickCommand;
 import com.ulfric.plugin.factions.command.FactionsLeaveCommand;
 import com.ulfric.plugin.factions.command.FactionsOpenCommand;
 import com.ulfric.plugin.factions.command.FactionsRoleCommand;
@@ -86,6 +87,7 @@ public class FactionsPlugin extends Plugin {
 		install(FactionsCloseCommand.class);
 		install(FactionsShowCommand.class);
 		install(FactionsShowCountCommand.class);
+		install(FactionsKickCommand.class);
 
 		install(DtrListener.class);
 		install(DtrRegenTask.class);
