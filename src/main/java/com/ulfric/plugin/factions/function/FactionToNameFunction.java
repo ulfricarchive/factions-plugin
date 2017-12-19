@@ -2,9 +2,9 @@ package com.ulfric.plugin.factions.function;
 
 import com.ulfric.plugin.factions.model.Faction;
 
-public class FactionNameFunction extends FactionFunction {
+public class FactionToNameFunction extends FactionFunction {
 
-	public FactionNameFunction() {
+	public FactionToNameFunction() {
 		super("name");
 	}
 

@@ -2,9 +2,9 @@ package com.ulfric.plugin.factions.function;
 
 import com.ulfric.plugin.factions.model.Faction;
 
-public class FactionShowCountFunction extends FactionFunction {
+public class FactionToShowCountFunction extends FactionFunction {
 
-	public FactionShowCountFunction() {
+	public FactionToShowCountFunction() {
 		super("showCount");
 	}
 

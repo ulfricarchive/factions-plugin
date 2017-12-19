@@ -7,7 +7,7 @@ import com.ulfric.plugin.economy.Economy;
 import com.ulfric.plugin.factions.Factions;
 import com.ulfric.plugin.factions.model.Faction;
 
-public class FactionBankFunction extends FactionFunction {
+public class FactionToBankFunction extends FactionFunction {
 
 	@Inject
 	private Factions factions;
@@ -15,7 +15,7 @@ public class FactionBankFunction extends FactionFunction {
 	@Inject
 	private Economy economy;
 
-	public FactionBankFunction() {
+	public FactionToBankFunction() {
 		super("bank");
 	}
 

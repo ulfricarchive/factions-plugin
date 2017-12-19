@@ -14,12 +14,12 @@ import com.ulfric.plugin.factions.model.Denizen;
 import com.ulfric.plugin.factions.model.Faction;
 import com.ulfric.plugin.factions.model.role.StandardRoles;
 
-public class DenizenTitleFunction extends DenizenFunction {
+public class DenizenToTitleFunction extends DenizenFunction {
 
 	@Inject
 	private Factions factions;
 
-	public DenizenTitleFunction() {
+	public DenizenToTitleFunction() {
 		super("title");
 	}
 

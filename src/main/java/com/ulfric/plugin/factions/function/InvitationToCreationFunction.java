@@ -2,9 +2,9 @@ package com.ulfric.plugin.factions.function;
 
 import com.ulfric.plugin.factions.model.invitation.Invitation;
 
-public class InvitationCreationFunction extends InvitationFunction {
+public class InvitationToCreationFunction extends InvitationFunction {
 
-	public InvitationCreationFunction() {
+	public InvitationToCreationFunction() {
 		super("creation");
 	}
 

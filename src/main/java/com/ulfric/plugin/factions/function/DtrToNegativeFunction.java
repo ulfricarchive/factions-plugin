@@ -2,9 +2,9 @@ package com.ulfric.plugin.factions.function;
 
 import com.ulfric.plugin.factions.model.dtr.DTR;
 
-public class DtrNegativeFunction extends DtrFunction {
+public class DtrToNegativeFunction extends DtrFunction {
 
-	public DtrNegativeFunction() {
+	public DtrToNegativeFunction() {
 		super("negative");
 	}
 

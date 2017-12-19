@@ -3,15 +3,15 @@ package com.ulfric.plugin.factions.function;
 import com.ulfric.commons.bukkit.player.PlayerHelper;
 import com.ulfric.plugin.factions.model.invitation.Invitation;
 
-public class InvitationInviterFunction extends InvitationFunction {
+public class InvitationToInvitedFunction extends InvitationFunction {
 
-	public InvitationInviterFunction() {
-		super("inviter");
+	public InvitationToInvitedFunction() {
+		super("invited");
 	}
 
 	@Override
 	public Object apply(Invitation invitation) {
-		return PlayerHelper.getName(invitation.getInviter());
+		return PlayerHelper.getName(invitation.getInvited());
 	}
 
 }

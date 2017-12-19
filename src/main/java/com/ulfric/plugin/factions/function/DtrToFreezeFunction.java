@@ -2,9 +2,9 @@ package com.ulfric.plugin.factions.function;
 
 import com.ulfric.plugin.factions.model.dtr.DTR;
 
-public class DtrFreezeFunction extends DtrFunction {
+public class DtrToFreezeFunction extends DtrFunction {
 
-	public DtrFreezeFunction() {
+	public DtrToFreezeFunction() {
 		super("freeze");
 	}
 

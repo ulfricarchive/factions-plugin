@@ -11,12 +11,12 @@ import com.ulfric.plugin.factions.Factions;
 import com.ulfric.plugin.factions.model.EntityHelper;
 import com.ulfric.plugin.factions.model.Faction;
 
-public class FactionDenizensFunction extends FactionFunction {
+public class FactionToDenizensFunction extends FactionFunction {
 
 	@Inject
 	private Factions factions;
 
-	public FactionDenizensFunction() {
+	public FactionToDenizensFunction() {
 		super("denizens");
 	}
 

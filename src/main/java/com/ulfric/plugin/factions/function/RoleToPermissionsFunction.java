@@ -3,9 +3,9 @@ package com.ulfric.plugin.factions.function;
 import com.ulfric.i18n.function.Function;
 import com.ulfric.plugin.factions.model.role.Role;
 
-public class RolePermissionsFunction extends Function<Role> {
+public class RoleToPermissionsFunction extends Function<Role> {
 
-	public RolePermissionsFunction() {
+	public RoleToPermissionsFunction() {
 		super("permissions", Role.class);
 	}
 

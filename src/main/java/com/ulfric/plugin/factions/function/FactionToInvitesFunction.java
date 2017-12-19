@@ -7,9 +7,9 @@ import java.util.List;
 import com.ulfric.plugin.factions.model.Faction;
 import com.ulfric.plugin.factions.model.invitation.Invitation;
 
-public class FactionInvitesFunction extends FactionFunction {
+public class FactionToInvitesFunction extends FactionFunction {
 
-	public FactionInvitesFunction() {
+	public FactionToInvitesFunction() {
 		super("invites");
 	}
 

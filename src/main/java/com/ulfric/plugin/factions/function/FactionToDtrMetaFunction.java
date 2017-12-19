@@ -2,9 +2,9 @@ package com.ulfric.plugin.factions.function;
 
 import com.ulfric.plugin.factions.model.Faction;
 
-public class FactionDtrMetaFunction extends FactionFunction {
+public class FactionToDtrMetaFunction extends FactionFunction {
 
-	public FactionDtrMetaFunction() {
+	public FactionToDtrMetaFunction() {
 		super("dtrMeta");
 	}
 

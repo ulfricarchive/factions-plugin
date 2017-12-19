@@ -3,9 +3,9 @@ package com.ulfric.plugin.factions.function;
 import com.ulfric.plugin.factions.model.Faction;
 import com.ulfric.plugin.factions.model.territory.Territory;
 
-public class FactionHomeFunction extends FactionFunction {
+public class FactionToHomeFunction extends FactionFunction {
 
-	public FactionHomeFunction() {
+	public FactionToHomeFunction() {
 		super("home");
 	}
 

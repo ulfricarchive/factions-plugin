@@ -4,18 +4,18 @@ import com.ulfric.dragoon.extension.inject.Inject;
 import com.ulfric.plugin.factions.model.Faction;
 import com.ulfric.plugin.factions.model.dtr.RaidHelper;
 
-public class FactionDtrFunction extends FactionFunction {
+public class FactionToRaidableFunction extends FactionFunction {
 
 	@Inject
 	private RaidHelper raidHelper;
 
-	public FactionDtrFunction() {
-		super("dtr");
+	public FactionToRaidableFunction() {
+		super("raidable");
 	}
 
 	@Override
 	public Object apply(Faction faction) {
-		return raidHelper.calculateDtr(faction);
+		return raidHelper.isRaidable(faction);
 	}
 
 }
