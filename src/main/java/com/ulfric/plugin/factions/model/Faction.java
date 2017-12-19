@@ -25,6 +25,7 @@ public class Faction extends Entity {
 	private DTR deathsTillRaidable;
 	private Integer showCount;
 	private Territory territory;
+	private UUID bankAccount;
 
 	public String getDescription() {
 		return description;
@@ -112,6 +113,14 @@ public class Faction extends Entity {
 
 	public void setTerritory(Territory territory) {
 		this.territory = territory;
+	}
+
+	public UUID getBankAccount() {
+		return bankAccount;
+	}
+
+	public void setBankAccount(UUID bankAccount) {
+		this.bankAccount = bankAccount;
 	}
 
 }
