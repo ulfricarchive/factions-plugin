@@ -30,4 +30,8 @@ public abstract class FactionFactionsCommand extends FactionsCommand {
 			.forEach(denizen -> tell(denizen, message));
 	}
 
+	protected void persistFaction() {
+		factions.persistFaction(faction);
+	}
+
 }
